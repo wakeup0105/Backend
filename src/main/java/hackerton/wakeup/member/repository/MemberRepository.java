@@ -1,4 +1,10 @@
 package hackerton.wakeup.member.repository;
 
-public interface MemberRepository {
+import hackerton.wakeup.member.entity.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    boolean existsByEmail(String email);
 }
