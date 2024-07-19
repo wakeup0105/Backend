@@ -6,4 +6,6 @@ import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 public interface MemberService {
     boolean checkEmailDuplication(String email);
     void joinMember(JoinRequestDTO req);
+    Member getMemberById(Long id);
+    Member getMemberByEmail(String email);
 }
