@@ -22,6 +22,6 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void joinMember(JoinRequestDTO req) {
-
+        memberRepository.save(req.toEntity());
     }
 }
