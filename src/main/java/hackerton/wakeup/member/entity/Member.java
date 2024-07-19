@@ -24,4 +24,7 @@ public class Member {
 
     @NotBlank
     private String password;
+
+    @NotBlank
+    private int point;
 }
