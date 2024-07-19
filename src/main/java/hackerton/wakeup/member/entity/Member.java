@@ -21,4 +21,7 @@ public class Member {
     @Column(nullable = false, unique = true)
     @NotBlank
     private String email;
+
+    @NotBlank
+    private String password;
 }
