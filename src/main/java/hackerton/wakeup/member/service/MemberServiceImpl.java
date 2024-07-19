@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -27,12 +29,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public Member getMemberById(Long id) {
-        return null;
+    public Optional<Member> getMemberById(Long id) {
+        return memberRepository.findById(id);
     }
 
     @Override
-    public Member getMemberByEmail(String email) {
-        return null;
+    public Optional<Member> getMemberByEmail(String email) {
+        return memberRepository.findByEmail(email);
     }
 }
