@@ -15,7 +15,7 @@ public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotBlank
-    private Long pk;
+    private Long id;
 
     @Email
     @Column(nullable = false, unique = true)
