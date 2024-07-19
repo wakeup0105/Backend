@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.entity.dto.request;
 
+import hackerton.wakeup.member.entity.Member;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -14,4 +15,12 @@ public class JoinRequestDTO {
     @NotBlank(message = "비밀번호가 비어있습니다.")
     private String password;
     private String checkPassword;
+
+    public Member toEntity(){
+        return Member.builder()
+                .email(this.email)
+                .password(this.password)
+                .point(0)
+                .build();
+    }
 }
