@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.service;
 
+import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,15 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public void joinMember(JoinRequestDTO req) {
         memberRepository.save(req.toEntity());
+    }
+
+    @Override
+    public Member getMemberById(Long id) {
+        return null;
+    }
+
+    @Override
+    public Member getMemberByEmail(String email) {
+        return null;
     }
 }
