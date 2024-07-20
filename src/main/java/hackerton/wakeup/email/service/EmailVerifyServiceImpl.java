@@ -1,6 +1,7 @@
 package hackerton.wakeup.email.service;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +13,22 @@ import java.util.concurrent.ConcurrentHashMap;
 @Service
 @Transactional
 @Primary
-public class EmailVerifyServiceImpl {
+public class EmailVerifyServiceImpl implements EmailVerifyService {
     private final Map<String, String> verificationCodes = new ConcurrentHashMap<>();
     private static final Duration EXPIRATION = Duration.ofMinutes(10);
+
+    @Override
+    public String generateVerificationCode(String email) {
+        return "";
+    }
+
+    @Override
+    public boolean verifyCode(String email, String code) {
+        return false;
+    }
+
+    @Override
+    public String randomCode() {
+        return RandomStringUtils.randomAlphanumeric(8);
+    }
 }
