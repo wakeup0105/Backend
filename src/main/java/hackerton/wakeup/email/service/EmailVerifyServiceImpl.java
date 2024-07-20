@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Duration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
@@ -19,7 +21,17 @@ public class EmailVerifyServiceImpl implements EmailVerifyService {
 
     @Override
     public String generateVerificationCode(String email) {
-        return "";
+        String code = randomCode();
+        verificationCodes.put(email, code);
+
+        //일정 시간이 지나면 Map 에서 키를 삭제하는 로직 ( 수행 로직, 시간제한, 시간단위 )
+        Executors.newSingleThreadScheduledExecutor().schedule(
+                () -> verificationCodes.remove(email),
+                EXPIRATION.toMillis(),
+                TimeUnit.MILLISECONDS
+        );
+
+        return code;
     }
 
     @Override
