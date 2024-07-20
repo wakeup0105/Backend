@@ -48,4 +48,9 @@ public class EmailSenderServiceImpl implements EmailSenderService {
                 code));
         mailSender.send(message);
     }
+
+    @Override
+    public String formatTime(int time) {
+        return "";
+    }
 }
