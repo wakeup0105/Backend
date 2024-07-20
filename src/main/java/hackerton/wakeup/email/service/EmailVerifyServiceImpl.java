@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -36,7 +37,10 @@ public class EmailVerifyServiceImpl implements EmailVerifyService {
 
     @Override
     public boolean verifyCode(String email, String code) {
-        return false;
+        //Map 에서 이메일을 제거하고 해당 이메일에 매칭되는 code 가 입력받은 code 와 같은지 확인
+        return Optional.ofNullable(verificationCodes.remove(email))
+                .map(storageCode -> storageCode.equals(code))
+                .orElse(false);
     }
 
     @Override
