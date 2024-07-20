@@ -25,7 +25,6 @@ public class EmailSenderServiceImpl implements EmailSenderService {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy. MM. dd.");
 
         LocalTime nowTime = LocalTime.now();
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
@@ -43,14 +42,21 @@ public class EmailSenderServiceImpl implements EmailSenderService {
                 위 인증 번호의 유효 기간은 요청 시점으로부터 약 10분입니다.
                 감사합니다.
                 """
-                .formatted(nowDate.format(dateTimeFormatter) + "시간 정보",
+                .formatted(nowDate.format(dateTimeFormatter) + formatTime(nowTime),
                 "장치 정보",
                 code));
         mailSender.send(message);
     }
 
     @Override
-    public String formatTime(int time) {
-        return "";
+    public String formatTime(LocalTime now) {
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern(":mm:ss");
+        if (now.getHour() >= 12){
+            String resultTime = now.getHour() % 12 + "";
+            return " 오후 " + resultTime + now.format(timeFormatter);
+        }
+        else{
+            return " 오전 " + now.getHour() + now.format(timeFormatter);
+        }
     }
 }
