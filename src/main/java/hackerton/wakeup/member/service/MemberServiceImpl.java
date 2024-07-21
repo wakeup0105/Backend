@@ -29,6 +29,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public void sendVerificationEmail(String email) {
+
+    }
+
+    @Override
     public Optional<Member> getMemberById(Long id) {
         return memberRepository.findById(id);
     }
