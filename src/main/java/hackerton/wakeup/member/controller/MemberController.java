@@ -27,7 +27,7 @@ public class MemberController {
     }
 
     @PostMapping("/send-verification")
-    public ResponseEntity<String> sendVerification(@RequestParam String email){
+    public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
         if (memberService.checkEmailDuplication(email)){
             return new ResponseEntity<>("이미 존재하는 이메일입니다.", HttpStatus.BAD_REQUEST);
         }
