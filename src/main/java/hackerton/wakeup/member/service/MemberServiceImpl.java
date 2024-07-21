@@ -34,7 +34,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void sendVerificationEmail(String email) {
-
+        String code = emailVerifyService.generateVerificationCode(email);
+        emailSenderService.sendVerificationCode(email, code);
     }
 
     @Override
