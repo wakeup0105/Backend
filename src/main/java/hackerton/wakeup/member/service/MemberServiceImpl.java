@@ -1,5 +1,7 @@
 package hackerton.wakeup.member.service;
 
+import hackerton.wakeup.email.service.EmailSenderService;
+import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final EmailVerifyService emailVerifyService;
+    private final EmailSenderService emailSenderService;
 
     @Override
     public boolean checkEmailDuplication(String email) {
