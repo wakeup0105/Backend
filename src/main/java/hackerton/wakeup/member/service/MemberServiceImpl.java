@@ -49,7 +49,8 @@ public class MemberServiceImpl implements MemberService {
         Member member = optionalMember.get();
 
         //비밀번호가 일치하지 않는다면 null
-        if (!passwordEncoder.matches(member.getPassword(), req.getPassword())) return null;
+        if (!passwordEncoder.matches(req.getPassword(), member.getPassword())) return null;
+
 
         return member;
     }
