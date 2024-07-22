@@ -26,4 +26,8 @@ public class JwtTokenUtil {
                 .parseClaimsJws(token)
                 .getBody();
     }
+
+    public static String getEmail(String token, String secretKey) {
+        return extractToken(token, secretKey).get("email").toString();
+    }
 }
