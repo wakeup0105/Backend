@@ -41,7 +41,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member loginMember(LoginRequestDTO req) {
-        return null;
+        Optional<Member> optionalMember = memberRepository.findByEmail(req.getEmail());
+
+        //이메일에 해당되는 멤버가 없다면 null
+        if (optionalMember.isEmpty()) return null;
+
+        Member member = optionalMember.get();
+
+        //비밀번호가 일치하지 않는다면 null
+        if (!passwordEncoder.matches(member.getPassword(), req.getPassword())) return null;
+
+        return member;
     }
 
     @Override
