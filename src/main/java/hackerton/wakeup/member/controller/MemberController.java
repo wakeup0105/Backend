@@ -1,6 +1,7 @@
 package hackerton.wakeup.member.controller;
 
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
+import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,9 @@ public class MemberController {
         memberService.joinMember(req);
         return ResponseEntity.ok("회원가입 성공");
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO req){}
 
     @PostMapping("/send-verification")
     public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
