@@ -30,4 +30,8 @@ public class JwtTokenUtil {
     public static String getEmail(String token, String secretKey) {
         return extractToken(token, secretKey).get("email").toString();
     }
+
+    public static boolean isExpired(String token, String secretKey) {
+        return extractToken(token, secretKey).getExpiration().before(new Date());
+    }
 }
