@@ -37,6 +37,9 @@ dependencies {
     annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
     implementation 'org.springframework.boot:spring-boot-starter-test'
 
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.1'
+
     //h2 db
     runtimeOnly 'com.h2database:h2'
 
