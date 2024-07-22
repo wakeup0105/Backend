@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.controller;
 
+import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.service.MemberService;
@@ -28,7 +29,12 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO req){}
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO req){
+        Member member = memberService.loginMember(req);
+
+        //null 이라면 정보 오류
+        if (member == null) return new ResponseEntity<>("이메일 또는 비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST);
+    }
 
     @PostMapping("/send-verification")
     public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
