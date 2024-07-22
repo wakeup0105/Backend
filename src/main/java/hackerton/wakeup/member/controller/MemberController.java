@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.controller;
 
+import hackerton.wakeup.common.security.JwtTokenUtil;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
@@ -39,6 +40,9 @@ public class MemberController {
 
         //null 이라면 정보 오류
         if (member == null) return new ResponseEntity<>("이메일 또는 비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST);
+
+        String token = JwtTokenUtil.createToken(member.getEmail(), secretKey, Long.parseLong(expirationTime));
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/send-verification")
