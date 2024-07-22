@@ -4,6 +4,7 @@ import hackerton.wakeup.email.service.EmailSenderService;
 import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
+import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -36,6 +37,11 @@ public class MemberServiceImpl implements MemberService {
         }
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         memberRepository.save(req.toEntity());
+    }
+
+    @Override
+    public Member loginMember(LoginRequestDTO req) {
+        return null;
     }
 
     @Override
