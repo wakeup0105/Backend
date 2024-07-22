@@ -7,6 +7,7 @@ import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ public class MemberServiceImpl implements MemberService {
     private final MemberRepository memberRepository;
     private final EmailVerifyService emailVerifyService;
     private final EmailSenderService emailSenderService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public boolean checkEmailDuplication(String email) {
@@ -32,6 +34,7 @@ public class MemberServiceImpl implements MemberService {
         if (emailVerifyService.verifyCode(req.getEmail(), req.getPassword())) {
             throw new RuntimeException("유효하지 않은 인증코드");
         }
+        req.setPassword(passwordEncoder.encode(req.getPassword()));
         memberRepository.save(req.toEntity());
     }
 
