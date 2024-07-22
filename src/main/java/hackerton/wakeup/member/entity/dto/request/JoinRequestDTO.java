@@ -16,6 +16,9 @@ public class JoinRequestDTO {
     private String password;
     private String checkPassword;
 
+    @NotBlank(message = "인증코드가 비어있습니다.")
+    private String verificationCode;
+
     public Member toEntity(){
         return Member.builder()
                 .email(this.email)

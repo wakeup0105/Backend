@@ -1,8 +1,7 @@
 package hackerton.wakeup.member.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
@@ -14,7 +13,6 @@ import lombok.*;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank
     private Long id;
 
     @Email
@@ -25,6 +23,7 @@ public class Member {
     @NotBlank
     private String password;
 
-    @NotBlank
+    @NotNull
+    @Min(0)
     private int point;
 }

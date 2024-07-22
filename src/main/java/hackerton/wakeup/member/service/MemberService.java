@@ -8,6 +8,7 @@ import java.util.Optional;
 public interface MemberService {
     boolean checkEmailDuplication(String email);
     void joinMember(JoinRequestDTO req);
+    void sendVerificationEmail(String email);
     Optional<Member> getMemberById(Long id);
     Optional<Member> getMemberByEmail(String email);
 }

@@ -1,5 +1,7 @@
 package hackerton.wakeup.member.service;
 
+import hackerton.wakeup.email.service.EmailSenderService;
+import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
@@ -17,6 +19,8 @@ import java.util.Optional;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final EmailVerifyService emailVerifyService;
+    private final EmailSenderService emailSenderService;
 
     @Override
     public boolean checkEmailDuplication(String email) {
@@ -25,7 +29,16 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void joinMember(JoinRequestDTO req) {
+        if (emailVerifyService.verifyCode(req.getEmail(), req.getPassword())) {
+            throw new RuntimeException("유효하지 않은 인증코드");
+        }
         memberRepository.save(req.toEntity());
+    }
+
+    @Override
+    public void sendVerificationEmail(String email) {
+        String code = emailVerifyService.generateVerificationCode(email);
+        emailSenderService.sendVerificationCode(email, code);
     }
 
     @Override

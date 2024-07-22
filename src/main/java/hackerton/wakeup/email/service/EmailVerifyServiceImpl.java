@@ -22,6 +22,7 @@ public class EmailVerifyServiceImpl implements EmailVerifyService {
     @Override
     public String generateVerificationCode(String email) {
         String code = randomCode();
+        verificationCodes.remove(email);
         verificationCodes.put(email, code);
 
         //일정 시간이 지나면 Map 에서 키를 삭제하는 로직 ( 수행 로직, 시간제한, 시간단위 )
