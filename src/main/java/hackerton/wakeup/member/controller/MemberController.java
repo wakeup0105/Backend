@@ -1,9 +1,13 @@
 package hackerton.wakeup.member.controller;
 
+import hackerton.wakeup.common.security.JwtTokenUtil;
+import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
+import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,10 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/member")
 public class MemberController {
     private final MemberService memberService;
+    @Value("${spring.jwt.secretKey}")
+    private String secretKey;
+    @Value("${spring.jwt.expirationTime}")
+    private String expirationTime;
 
     @PostMapping("/signup")
     public ResponseEntity<String> join(@Valid @RequestBody JoinRequestDTO req){
@@ -24,6 +32,17 @@ public class MemberController {
         }
         memberService.joinMember(req);
         return ResponseEntity.ok("회원가입 성공");
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO req){
+        Member member = memberService.loginMember(req);
+
+        //null 이라면 정보 오류
+        if (member == null) return new ResponseEntity<>("이메일 또는 비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST);
+
+        String token = JwtTokenUtil.createToken(member.getEmail(), secretKey, Long.parseLong(expirationTime));
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/send-verification")
