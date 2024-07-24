@@ -47,9 +47,6 @@ public class MemberController {
 
     @PostMapping("/send-verification")
     public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
-        if (memberService.checkEmailDuplication(email)){
-            return new ResponseEntity<>("이미 존재하는 이메일입니다.", HttpStatus.BAD_REQUEST);
-        }
         memberService.sendVerificationEmail(email);
         return ResponseEntity.ok("인증코드가 이메일로 전송 되었습니다.");
     }
