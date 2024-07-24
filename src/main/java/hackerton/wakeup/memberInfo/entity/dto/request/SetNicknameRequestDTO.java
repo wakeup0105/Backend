@@ -1,4 +1,4 @@
-package hackerton.wakeup.memberInfo.entity.dto;
+package hackerton.wakeup.memberInfo.entity.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
