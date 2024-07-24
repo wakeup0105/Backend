@@ -3,6 +3,7 @@ package hackerton.wakeup.member.controller;
 import hackerton.wakeup.common.security.JwtTokenUtil;
 import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
+import hackerton.wakeup.member.entity.dto.request.ChangePasswordRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.FindAccountRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
@@ -57,6 +58,18 @@ public class MemberController {
             return new ResponseEntity<>("인증코드가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok("인증성공");
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<String> changePassword(@Valid @RequestBody ChangePasswordRequestDTO req){
+        if (!memberService.checkEmailDuplication(req.getEmail())){
+            return new ResponseEntity<>("이메일이 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
+        if (!req.getPassword().equals(req.getCheckPassword())){
+            return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
+        memberService.changePassword(req);
+        return ResponseEntity.ok("비밀번호 변경 성공");
     }
 
     @PostMapping("/send-verification")
