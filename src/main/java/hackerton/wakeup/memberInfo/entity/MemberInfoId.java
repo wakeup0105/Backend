@@ -14,7 +14,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Embeddable
 public class MemberInfoId implements Serializable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Long member;
 }
