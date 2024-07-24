@@ -25,4 +25,6 @@ public class MemberInfo {
     private Member member;
 
     private String nickname;
+
+    private String tag;
 }
