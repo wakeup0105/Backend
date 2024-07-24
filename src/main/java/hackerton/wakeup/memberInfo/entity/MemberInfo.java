@@ -2,6 +2,8 @@ package hackerton.wakeup.memberInfo.entity;
 
 import hackerton.wakeup.member.entity.Member;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,6 +26,8 @@ public class MemberInfo {
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Max(30)
+    @Min(2)
     private String nickname;
 
     private String tag;
