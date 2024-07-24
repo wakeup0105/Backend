@@ -19,7 +19,7 @@ public class MemberInfoServiceImpl implements MemberInfoService{
 
     @Override
     public boolean checkNicknameAndTagDuplication(String nickname, String tag) {
-        return false;
+        return memberInfoRepository.existsByNicknameAndTag(nickname, tag);
     }
 
     @Override
