@@ -3,6 +3,7 @@ package hackerton.wakeup.member.service;
 import hackerton.wakeup.email.service.EmailSenderService;
 import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
+import hackerton.wakeup.member.entity.dto.request.ChangePasswordRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
@@ -53,6 +54,11 @@ public class MemberServiceImpl implements MemberService {
 
 
         return member;
+    }
+
+    @Override
+    public void changePassword(ChangePasswordRequestDTO req) {
+
     }
 
     @Override
