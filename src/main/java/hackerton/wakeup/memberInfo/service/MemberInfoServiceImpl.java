@@ -28,12 +28,12 @@ public class MemberInfoServiceImpl implements MemberInfoService{
     }
 
     @Override
-    public Optional<MemberInfo> findById(MemberInfoId id) {
-        return Optional.empty();
+    public MemberInfo findById(MemberInfoId id) {
+        return memberInfoRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Optional<MemberInfo> findByMemberId(Long member_id) {
-        return Optional.empty();
+    public MemberInfo findByMemberId(Long member_id) {
+        return memberInfoRepository.findByIdMember(member_id).orElse(null);
     }
 }
