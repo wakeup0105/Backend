@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface MemberInfoService {
     boolean checkNicknameAndTagDuplication(String nickname, String tag);
-    String settingNickname(String nickname, String tag);
+    String settingNickname(String nickname);
     MemberInfo findById(MemberInfoId id);
     MemberInfo findByMemberId(Long member_id);
 }

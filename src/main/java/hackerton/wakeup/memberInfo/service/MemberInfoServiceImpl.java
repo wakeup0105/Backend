@@ -23,7 +23,7 @@ public class MemberInfoServiceImpl implements MemberInfoService{
     }
 
     @Override
-    public String settingNickname(String nickname, String tag) {
+    public String settingNickname(String nickname) {
         return "";
     }
 
