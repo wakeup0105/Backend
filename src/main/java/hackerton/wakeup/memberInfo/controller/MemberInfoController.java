@@ -1,5 +1,6 @@
 package hackerton.wakeup.memberInfo.controller;
 
+import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.service.MemberService;
 import hackerton.wakeup.memberInfo.entity.dto.request.SetNicknameRequestDTO;
 import hackerton.wakeup.memberInfo.service.MemberInfoService;
@@ -18,6 +19,8 @@ public class MemberInfoController {
 
     @PostMapping("/set-nickname")
     public ResponseEntity<String> setNickname(@Valid @RequestBody SetNicknameRequestDTO req, Authentication auth){
-
+        Member member = memberService.getMemberByEmail(auth.getName()).get();
+        String resultNickname = memberInfoService.settingNickname(member, req.getNickname());
+        return ResponseEntity.ok("닉네임 설정 성공: " + resultNickname);
     }
 }
