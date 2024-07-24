@@ -1,5 +1,6 @@
 package hackerton.wakeup.memberInfo.service;
 
+import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.memberInfo.entity.MemberInfo;
 import hackerton.wakeup.memberInfo.entity.MemberInfoId;
 import hackerton.wakeup.memberInfo.repository.MemberInfoRepository;
@@ -24,7 +25,7 @@ public class MemberInfoServiceImpl implements MemberInfoService{
     }
 
     @Override
-    public String settingNickname(String nickname) {
+    public String settingNickname(Member member, String nickname) {
         String tag = "0000";
         while (memberInfoRepository.existsByNicknameAndTag(nickname, tag)){
             tag = RandomStringUtils.randomNumeric(4);
