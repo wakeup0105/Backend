@@ -49,7 +49,7 @@ public class MemberController {
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("/findAccount")
+    @PostMapping("/find-account")
     public ResponseEntity<String> findAccount(@Valid @RequestBody FindAccountRequestDTO req){
         if (!memberService.checkEmailDuplication(req.getEmail())){
             return new ResponseEntity<>("이메일이 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
