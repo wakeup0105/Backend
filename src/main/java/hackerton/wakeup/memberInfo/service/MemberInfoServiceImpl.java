@@ -2,6 +2,7 @@ package hackerton.wakeup.memberInfo.service;
 
 import hackerton.wakeup.memberInfo.entity.MemberInfo;
 import hackerton.wakeup.memberInfo.entity.MemberInfoId;
+import hackerton.wakeup.memberInfo.repository.MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Primary
 public class MemberInfoServiceImpl implements MemberInfoService{
+    private final MemberInfoRepository memberInfoRepository;
+
     @Override
     public boolean checkNicknameAndTagDuplication(String nickname, String tag) {
         return false;
