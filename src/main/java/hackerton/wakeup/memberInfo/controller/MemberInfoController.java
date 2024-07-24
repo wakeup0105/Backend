@@ -27,6 +27,7 @@ public class MemberInfoController {
     }
 
     @GetMapping("/info")
+    @ResponseBody
     public ResponseEntity<MemberInfo> findMemberInfo(Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         MemberInfo memberInfo = memberInfoService.findByMemberId(member.getId());
