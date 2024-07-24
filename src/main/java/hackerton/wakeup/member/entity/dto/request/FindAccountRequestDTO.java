@@ -11,4 +11,7 @@ import lombok.Setter;
 public class FindAccountRequestDTO {
     @NotBlank(message = "이메일이 비어있습니다.")
     private String email;
+
+    @NotBlank(message = "인증번호가 비어있습니다.")
+    private String verificationCode;
 }
