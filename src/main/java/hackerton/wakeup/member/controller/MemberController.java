@@ -1,7 +1,9 @@
 package hackerton.wakeup.member.controller;
 
 import hackerton.wakeup.common.security.JwtTokenUtil;
+import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
+import hackerton.wakeup.member.entity.dto.request.FindAccountRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.service.MemberService;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/member")
 public class MemberController {
     private final MemberService memberService;
+    private final EmailVerifyService emailVerifyService;
     @Value("${spring.jwt.secretKey}")
     private String secretKey;
     @Value("${spring.jwt.expirationTime}")
@@ -43,6 +46,17 @@ public class MemberController {
 
         String token = JwtTokenUtil.createToken(member.getEmail(), secretKey, Long.parseLong(expirationTime));
         return ResponseEntity.ok(token);
+    }
+
+    @PostMapping("/findAccount")
+    public ResponseEntity<String> findAccount(@Valid @RequestBody FindAccountRequestDTO req){
+        if (!memberService.checkEmailDuplication(req.getEmail())){
+            return new ResponseEntity<>("이메일이 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
+        if(!emailVerifyService.verifyCode(req.getEmail(), req.getVerificationCode())){
+            return new ResponseEntity<>("인증코드가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
+        }
+        return ResponseEntity.ok("인증성공");
     }
 
     @PostMapping("/send-verification")
