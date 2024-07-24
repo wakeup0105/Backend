@@ -35,7 +35,8 @@ public class MemberController {
             return new ResponseEntity<>("비밀번호 불일치", HttpStatus.BAD_REQUEST);
         }
         memberService.joinMember(req);
-        return ResponseEntity.ok("회원가입 성공");
+        String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
+        return ResponseEntity.ok("회원가입 성공, Token: " + token);
     }
 
     @PostMapping("/login")
