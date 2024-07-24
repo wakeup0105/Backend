@@ -31,6 +31,7 @@ public class MemberInfoServiceImpl implements MemberInfoService{
             tag = RandomStringUtils.randomNumeric(4);
         }
         memberInfoRepository.save(MemberInfo.builder()
+                .id(MemberInfoId.builder().id(member.getId()).member(member.getId()).build())
                 .member(member)
                 .nickname(nickname)
                 .tag(tag)
