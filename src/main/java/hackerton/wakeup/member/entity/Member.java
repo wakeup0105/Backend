@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.entity;
 
+import hackerton.wakeup.memberInfo.entity.MemberInfo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -26,4 +27,7 @@ public class Member {
     @NotNull
     @Min(0)
     private int point;
+
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private MemberInfo memberInfo;
 }
