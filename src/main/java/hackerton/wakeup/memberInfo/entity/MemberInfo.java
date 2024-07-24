@@ -9,18 +9,17 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "MemberInfo")
-@IdClass(MemberInfoId.class)
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class MemberInfo {
 
-    @Id
+    @EmbeddedId
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private MemberInfoId id;
 
-    @Id
+    @MapsId("member")
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
