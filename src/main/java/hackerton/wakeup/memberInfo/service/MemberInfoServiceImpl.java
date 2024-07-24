@@ -4,6 +4,7 @@ import hackerton.wakeup.memberInfo.entity.MemberInfo;
 import hackerton.wakeup.memberInfo.entity.MemberInfoId;
 import hackerton.wakeup.memberInfo.repository.MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,12 @@ public class MemberInfoServiceImpl implements MemberInfoService{
 
     @Override
     public String settingNickname(String nickname) {
-        return "";
+        String tag = "0000";
+        while (memberInfoRepository.existsByNicknameAndTag(nickname, tag)){
+            tag = RandomStringUtils.randomNumeric(4);
+        }
+        memberInfoRepository.save();
+        return nickname + "#" + tag;
     }
 
     @Override
