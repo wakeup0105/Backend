@@ -1,5 +1,6 @@
 package hackerton.wakeup.memberInfo.entity;
 
+import hackerton.wakeup.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,5 +17,10 @@ public class MemberInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
+
+    @Id
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 }
