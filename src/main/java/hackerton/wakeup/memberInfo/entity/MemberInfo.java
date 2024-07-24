@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "MemberInfo")
+@IdClass(MemberInfo.class)
 @Builder
 @Getter
 @NoArgsConstructor
