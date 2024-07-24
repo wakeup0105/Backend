@@ -7,6 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MemberInfoRepository extends JpaRepository<MemberInfo, MemberInfoId> {
-    boolean existsByNickname(String nickname);
     boolean existsByNicknameAndTag(String nickname, String tag);
 }
