@@ -30,8 +30,9 @@ public class MemberInfoServiceImpl implements MemberInfoService{
         while (memberInfoRepository.existsByNicknameAndTag(nickname, tag)){
             tag = RandomStringUtils.randomNumeric(4);
         }
+        MemberInfoId memberInfoId = MemberInfoId.builder().id(member.getId()).member(member.getId()).build();
         memberInfoRepository.save(MemberInfo.builder()
-                .id(MemberInfoId.builder().id(member.getId()).member(member.getId()).build())
+                .id(memberInfoId)
                 .member(member)
                 .nickname(nickname)
                 .tag(tag)
