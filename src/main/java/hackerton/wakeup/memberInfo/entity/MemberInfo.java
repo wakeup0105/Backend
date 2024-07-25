@@ -1,5 +1,6 @@
 package hackerton.wakeup.memberInfo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import hackerton.wakeup.member.entity.Member;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -17,6 +18,7 @@ public class MemberInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private MemberInfoId id;
 
+    @JsonBackReference
     @MapsId("member")
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
