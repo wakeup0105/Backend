@@ -25,4 +25,7 @@ public class Character {
 
     @NotNull
     private int level;
+
+    @NotNull
+    private Long exp;
 }
