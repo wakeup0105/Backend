@@ -22,6 +22,7 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character getByMemberId(Long member_id) {
+        characterRepository.findByIdMember(member_id);
         return null;
     }
 }
