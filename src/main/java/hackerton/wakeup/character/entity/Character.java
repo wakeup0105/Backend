@@ -28,4 +28,9 @@ public class Character {
 
     @NotNull
     private Long exp;
+
+    private String eyes;
+    private String mouth;
+    private String head;
+    private String body;
 }
