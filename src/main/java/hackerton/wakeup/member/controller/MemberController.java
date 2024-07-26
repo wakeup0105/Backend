@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -63,14 +64,15 @@ public class MemberController {
     }
 
     @PutMapping("/change-password")
-    public ResponseEntity<String> changePassword(@Valid @RequestBody ChangePasswordRequestDTO req){
-        if (!memberService.checkEmailDuplication(req.getEmail())){
+    public ResponseEntity<String> changePassword(@Valid @RequestBody ChangePasswordRequestDTO req, Authentication auth){
+        Member member = memberService.getMemberByEmail(auth.getName()).get();
+        if (!memberService.checkEmailDuplication(member.getEmail())){
             return new ResponseEntity<>("이메일이 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
         if (!req.getPassword().equals(req.getCheckPassword())){
             return new ResponseEntity<>("비밀번호가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
-        memberService.changePassword(req);
+        memberService.changePassword(member.getEmail(),req);
         return ResponseEntity.ok("비밀번호 변경 성공");
     }
 
