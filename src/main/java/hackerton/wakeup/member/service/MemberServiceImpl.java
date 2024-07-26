@@ -33,9 +33,9 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void joinMember(JoinRequestDTO req) {
-        if (emailVerifyService.verifyCode(req.getEmail(), req.getPassword())) {
-            throw new RuntimeException("유효하지 않은 인증코드");
-        }
+//        if (emailVerifyService.verifyCode(req.getEmail(), req.getPassword())) {
+//            throw new RuntimeException("유효하지 않은 인증코드");
+//        }
         req.setPassword(passwordEncoder.encode(req.getPassword()));
         memberRepository.save(req.toEntity());
     }

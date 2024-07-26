@@ -1,11 +1,10 @@
 package hackerton.wakeup.memberInfo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import hackerton.wakeup.member.entity.Member;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.*;
+import lombok.*;
 
 @Entity
 @Table(name = "MemberInfo")
@@ -19,12 +18,16 @@ public class MemberInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private MemberInfoId id;
 
+    @JsonBackReference
     @MapsId("member")
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 
+    @Size(min = 2, max = 30)
+    @NotBlank
     private String nickname;
 
+    @NotBlank
     private String tag;
 }
