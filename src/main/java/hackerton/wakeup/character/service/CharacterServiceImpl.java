@@ -1,6 +1,7 @@
 package hackerton.wakeup.character.service;
 
 import hackerton.wakeup.character.entity.Character;
+import hackerton.wakeup.character.entity.CharacterId;
 import hackerton.wakeup.character.repository.CharacterRepository;
 import hackerton.wakeup.member.entity.Member;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,10 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character initCharacter(Member member) {
-        return null;
+        CharacterId buildId = CharacterId.builder().id(member.getId()).member(member.getId()).build();
+        Character character = Character.builder().id(buildId).member(member).level(1).exp(0L).build();
+        characterRepository.save(character);
+        return characterRepository.findByIdMember(member.getId()).orElse(null);
     }
 
     @Override
