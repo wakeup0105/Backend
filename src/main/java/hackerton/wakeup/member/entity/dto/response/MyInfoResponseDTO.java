@@ -13,6 +13,9 @@ public class MyInfoResponseDTO {
     @NotBlank
     private String email;
 
+    @NotBlank
+    private String code;
+
     public MyInfoResponseDTO toEntity(Member member) {
         MyInfoResponseDTO myInfoResponseDTO = new MyInfoResponseDTO();
         myInfoResponseDTO.setEmail(member.getEmail());
