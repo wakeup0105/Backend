@@ -18,7 +18,8 @@ public class MyInfoResponseDTO {
 
     public MyInfoResponseDTO toEntity(String email, String code) {
         MyInfoResponseDTO myInfoResponseDTO = new MyInfoResponseDTO();
-        myInfoResponseDTO.setEmail(member.getEmail());
+        myInfoResponseDTO.setEmail(email);
+        myInfoResponseDTO.setCode(code);
         return myInfoResponseDTO;
     }
 }
