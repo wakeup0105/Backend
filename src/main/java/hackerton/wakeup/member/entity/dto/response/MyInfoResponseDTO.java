@@ -16,7 +16,7 @@ public class MyInfoResponseDTO {
     @NotBlank
     private String code;
 
-    public MyInfoResponseDTO toEntity(String email, String code) {
+    public static MyInfoResponseDTO fromEntity(String email, String code) {
         MyInfoResponseDTO myInfoResponseDTO = new MyInfoResponseDTO();
         myInfoResponseDTO.setEmail(email);
         myInfoResponseDTO.setCode(code);
