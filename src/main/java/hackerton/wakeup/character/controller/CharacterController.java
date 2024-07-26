@@ -2,6 +2,7 @@ package hackerton.wakeup.character.controller;
 
 import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.character.service.CharacterService;
+import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,8 @@ public class CharacterController {
     @GetMapping("/info")
     @ResponseBody
     public ResponseEntity<Character> userInfoAll(Authentication auth){
-
+        Member member = memberService.getMemberByEmail(auth.getName()).get();
+        Character findCharacter = characterService.getByMemberId(member.getId());
+        return ResponseEntity.ok(findCharacter);
     }
 }
