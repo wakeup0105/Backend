@@ -13,4 +13,5 @@ import java.io.Serializable;
 @Embeddable
 public class CharacterId implements Serializable {
     private Long id;
+    private Long member;
 }
