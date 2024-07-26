@@ -58,7 +58,8 @@ public class MemberController {
         if(!emailVerifyService.verifyCode(req.getEmail(), req.getVerificationCode())){
             return new ResponseEntity<>("인증코드가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok("인증성공");
+        String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
+        return ResponseEntity.ok("인증성공, Token: " + token);
     }
 
     @PutMapping("/change-password")
