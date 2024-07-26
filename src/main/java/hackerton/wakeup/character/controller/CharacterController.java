@@ -1,6 +1,7 @@
 package hackerton.wakeup.character.controller;
 
 import hackerton.wakeup.character.entity.Character;
+import hackerton.wakeup.character.entity.dto.response.GrowResponseDTO;
 import hackerton.wakeup.character.service.CharacterService;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.service.MemberService;
@@ -25,5 +26,11 @@ public class CharacterController {
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         Character findCharacter = characterService.getByMemberId(member.getId());
         return ResponseEntity.ok(findCharacter);
+    }
+
+    @GetMapping("/info-grow")
+    @ResponseBody
+    public ResponseEntity<GrowResponseDTO> userInfoGrow(Authentication auth){
+
     }
 }
