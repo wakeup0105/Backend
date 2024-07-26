@@ -31,6 +31,8 @@ public class CharacterController {
     @GetMapping("/info-grow")
     @ResponseBody
     public ResponseEntity<GrowResponseDTO> userInfoGrow(Authentication auth){
-
+        Member member = memberService.getMemberByEmail(auth.getName()).get();
+        Character findCharacter = characterService.getByMemberId(member.getId());
+        return ResponseEntity.ok(new GrowResponseDTO().toEntity(findCharacter));
     }
 }
