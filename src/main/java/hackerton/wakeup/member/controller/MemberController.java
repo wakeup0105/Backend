@@ -7,6 +7,7 @@ import hackerton.wakeup.member.entity.dto.request.ChangePasswordRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.FindAccountRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
+import hackerton.wakeup.member.entity.dto.response.MyInfoResponseDTO;
 import hackerton.wakeup.member.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -80,5 +81,12 @@ public class MemberController {
     public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
         memberService.sendVerificationEmail(email);
         return ResponseEntity.ok("인증코드가 이메일로 전송 되었습니다.");
+    }
+
+    @GetMapping("/my-info")
+    @ResponseBody
+    public ResponseEntity<MyInfoResponseDTO> myInfo(Authentication auth){
+        Member member = memberService.getMemberByEmail(auth.getName()).get();
+        return ResponseEntity.ok(new MyInfoResponseDTO().toEntity(member));
     }
 }
