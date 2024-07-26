@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -22,7 +24,7 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Character getByMemberId(Long member_id) {
-        characterRepository.findByIdMember(member_id);
-        return null;
+        Optional<Character> findMember = characterRepository.findByIdMember(member_id);
+        return findMember.orElse(null);
     }
 }
