@@ -9,9 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ChangePasswordRequestDTO {
-    @NotBlank
-    private String email;
-
     @NotBlank(message = "비밀번호가 비어있습니다.")
     private String password;
     private String checkPassword;
