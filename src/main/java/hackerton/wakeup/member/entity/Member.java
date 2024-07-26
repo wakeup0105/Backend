@@ -1,6 +1,7 @@
 package hackerton.wakeup.member.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.memberInfo.entity.MemberInfo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -32,4 +33,8 @@ public class Member {
     @JsonManagedReference
     @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private MemberInfo memberInfo;
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "member", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Character character;
 }
