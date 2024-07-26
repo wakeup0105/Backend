@@ -19,11 +19,10 @@ public class CharacterServiceImpl implements CharacterService {
     private final CharacterRepository characterRepository;
 
     @Override
-    public Character initCharacter(Member member) {
+    public void initCharacter(Member member) {
         CharacterId buildId = CharacterId.builder().id(member.getId()).member(member.getId()).build();
         Character character = Character.builder().id(buildId).member(member).level(1).exp(0L).build();
         characterRepository.save(character);
-        return characterRepository.findByIdMember(member.getId()).orElse(null);
     }
 
     @Override
