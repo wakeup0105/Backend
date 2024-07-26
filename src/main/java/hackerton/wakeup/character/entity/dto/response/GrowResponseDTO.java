@@ -14,10 +14,10 @@ public class GrowResponseDTO {
     @NotNull
     private Long exp;
 
-    public GrowResponseDTO toEntity(Character character){
-        GrowResponseDTO growResponseDTO = new GrowResponseDTO();
-        growResponseDTO.setLevel(character.getLevel());
-        growResponseDTO.setExp(character.getExp());
-        return growResponseDTO;
+    public static GrowResponseDTO fromEntity(Character character){
+        GrowResponseDTO dto = new GrowResponseDTO();
+        dto.setLevel(character.getLevel());
+        dto.setExp(character.getExp());
+        return dto;
     }
 }

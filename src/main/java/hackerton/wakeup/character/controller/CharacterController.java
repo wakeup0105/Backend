@@ -34,7 +34,7 @@ public class CharacterController {
     public ResponseEntity<GrowResponseDTO> userInfoGrow(Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         Character findCharacter = characterService.getByMemberId(member.getId());
-        return ResponseEntity.ok(new GrowResponseDTO().toEntity(findCharacter));
+        return ResponseEntity.ok(GrowResponseDTO.fromEntity(findCharacter));
     }
 
     @GetMapping("/info-customize")
@@ -42,6 +42,6 @@ public class CharacterController {
     public ResponseEntity<CustomizeResponseDTO> userInfoCustomize(Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         Character findCharacter = characterService.getByMemberId(member.getId());
-        return ResponseEntity.ok(new CustomizeResponseDTO().toEntity(findCharacter));
+        return ResponseEntity.ok(CustomizeResponseDTO.fromEntity(findCharacter));
     }
 }

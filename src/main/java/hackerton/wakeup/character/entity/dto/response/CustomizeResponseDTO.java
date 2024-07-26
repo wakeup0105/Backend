@@ -12,12 +12,12 @@ public class CustomizeResponseDTO {
     private String head;
     private String body;
 
-    public CustomizeResponseDTO toEntity(Character character){
-        CustomizeResponseDTO customizeResponseDTO = new CustomizeResponseDTO();
-        customizeResponseDTO.setEyes(character.getEyes());
-        customizeResponseDTO.setMouth(character.getMouth());
-        customizeResponseDTO.setHead(character.getHead());
-        customizeResponseDTO.setBody(character.getBody());
-        return customizeResponseDTO;
+    public static CustomizeResponseDTO fromEntity(Character character){
+        CustomizeResponseDTO dto = new CustomizeResponseDTO();
+        dto.setEyes(character.getEyes());
+        dto.setMouth(character.getMouth());
+        dto.setHead(character.getHead());
+        dto.setBody(character.getBody());
+        return dto;
     }
 }
