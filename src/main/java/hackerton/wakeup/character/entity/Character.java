@@ -3,6 +3,7 @@ package hackerton.wakeup.character.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import hackerton.wakeup.member.entity.Member;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -21,4 +22,7 @@ public class Character {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    @NotNull
+    private int level;
 }
