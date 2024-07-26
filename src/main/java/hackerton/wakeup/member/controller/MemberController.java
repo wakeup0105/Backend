@@ -87,6 +87,6 @@ public class MemberController {
     @ResponseBody
     public ResponseEntity<MyInfoResponseDTO> myInfo(Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
-        return ResponseEntity.ok(new MyInfoResponseDTO().toEntity(member));
+        return ResponseEntity.ok(new MyInfoResponseDTO().toEntity(member.getEmail(), member.getMemberInfo().getTag()));
     }
 }
