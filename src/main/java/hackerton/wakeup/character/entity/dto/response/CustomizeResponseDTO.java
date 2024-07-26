@@ -6,4 +6,8 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 public class CustomizeResponseDTO {
+    private String eyes;
+    private String mouth;
+    private String head;
+    private String body;
 }
