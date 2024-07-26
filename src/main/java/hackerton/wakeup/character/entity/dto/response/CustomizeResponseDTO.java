@@ -14,10 +14,10 @@ public class CustomizeResponseDTO {
 
     public static CustomizeResponseDTO fromEntity(Character character){
         CustomizeResponseDTO dto = new CustomizeResponseDTO();
-        dto.setEyes(character.getEyes());
-        dto.setMouth(character.getMouth());
-        dto.setHead(character.getHead());
-        dto.setBody(character.getBody());
+        dto.setEyes(character.getEyes() != null ? character.getEyes() : "");
+        dto.setMouth(character.getMouth() != null ? character.getMouth() : "");
+        dto.setHead(character.getHead() != null ? character.getHead() : "");
+        dto.setBody(character.getBody() != null ? character.getBody() : "");
         return dto;
     }
 }
