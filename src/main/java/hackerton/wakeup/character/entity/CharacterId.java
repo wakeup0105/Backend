@@ -12,4 +12,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Embeddable
 public class CharacterId implements Serializable {
+    private Long id;
 }
