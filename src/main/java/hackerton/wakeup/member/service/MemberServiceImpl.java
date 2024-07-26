@@ -58,10 +58,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void changePassword(String email,ChangePasswordRequestDTO req) {
-        Member member = memberRepository.findByEmail(req.getEmail()).get();
+        Member member = memberRepository.findByEmail(email).get();
         memberRepository.save(Member.builder()
                 .id(member.getId())
-                .email(member.getEmail())
+                .email(email)
                 .password(passwordEncoder.encode(req.getPassword()))
                 .point(member.getPoint())
                 .build());
