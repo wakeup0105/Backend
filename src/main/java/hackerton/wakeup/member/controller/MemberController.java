@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.controller;
 
+import hackerton.wakeup.character.service.CharacterService;
 import hackerton.wakeup.common.security.JwtTokenUtil;
 import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 public class MemberController {
     private final MemberService memberService;
     private final EmailVerifyService emailVerifyService;
+    private final CharacterService characterService;
     @Value("${spring.jwt.secretKey}")
     private String secretKey;
     @Value("${spring.jwt.expirationTime}")
@@ -37,6 +39,7 @@ public class MemberController {
             return new ResponseEntity<>("비밀번호 불일치", HttpStatus.BAD_REQUEST);
         }
         memberService.joinMember(req);
+        characterService.initCharacter(memberService.getMemberByEmail(req.getEmail()).get());
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
         return ResponseEntity.ok("회원가입 성공, Token: " + token);
     }
