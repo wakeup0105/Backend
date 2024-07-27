@@ -5,9 +5,9 @@ import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class JwtTokenResponseDTO {
+
+    private String token_type = "Bearer";
 
     @NotBlank
     private String access_token;
