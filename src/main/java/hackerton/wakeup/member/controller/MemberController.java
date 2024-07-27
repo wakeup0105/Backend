@@ -46,14 +46,14 @@ public class MemberController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginRequestDTO req){
+    public ResponseEntity<JwtTokenResponseDTO> login(@Valid @RequestBody LoginRequestDTO req){
         Member member = memberService.loginMember(req);
 
         //null 이라면 정보 오류
-        if (member == null) return new ResponseEntity<>("이메일 또는 비밀번호가 틀렸습니다.", HttpStatus.BAD_REQUEST);
+        if (member == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         String token = JwtTokenUtil.createToken(member.getEmail(), secretKey, Long.parseLong(expirationTime));
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
     }
 
     @PostMapping("/find-account")
