@@ -11,4 +11,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Embeddable
 public class OwnEyesAvatarId implements Serializable {
+    private Long eyes_id;
 }
