@@ -10,4 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OwnEyesAvatar {
+
+    @EmbeddedId
+    private OwnEyesAvatarId id;
 }
