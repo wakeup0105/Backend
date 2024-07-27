@@ -1,4 +1,4 @@
-package hackerton.wakeup.eyes.entity;
+package hackerton.wakeup.eyes.own.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.*;
