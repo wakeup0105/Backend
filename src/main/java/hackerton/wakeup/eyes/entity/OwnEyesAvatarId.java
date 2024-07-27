@@ -12,4 +12,5 @@ import java.io.Serializable;
 @Embeddable
 public class OwnEyesAvatarId implements Serializable {
     private Long eyes_id;
+    private Long character_id;
 }
