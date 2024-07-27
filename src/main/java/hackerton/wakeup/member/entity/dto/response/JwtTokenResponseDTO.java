@@ -14,4 +14,9 @@ public class JwtTokenResponseDTO {
 
     @NotBlank
     private String expires_in;
+
+    public JwtTokenResponseDTO(String access_token, String expires_in) {
+        this.access_token = access_token;
+        this.expires_in = expires_in;
+    }
 }
