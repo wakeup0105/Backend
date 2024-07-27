@@ -1,5 +1,6 @@
 package hackerton.wakeup.eyes.own.entity;
 
+import hackerton.wakeup.character.entity.CharacterId;
 import jakarta.persistence.Embeddable;
 import lombok.*;
 
@@ -11,6 +12,5 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Embeddable
 public class OwnEyesAvatarId implements Serializable {
-    private Long eyes_id;
-    private Long character_id;
+    private CharacterId characterId;
 }
