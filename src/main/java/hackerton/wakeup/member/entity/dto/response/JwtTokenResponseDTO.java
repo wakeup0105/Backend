@@ -10,4 +10,7 @@ public class JwtTokenResponseDTO {
 
     @NotBlank
     private String access_token;
+
+    @NotBlank
+    private String expires_in;
 }
