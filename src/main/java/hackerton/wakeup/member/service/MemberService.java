@@ -11,7 +11,7 @@ public interface MemberService {
     boolean checkEmailDuplication(String email);
     void joinMember(JoinRequestDTO req);
     Member loginMember(LoginRequestDTO req);
-    void changePassword(ChangePasswordRequestDTO req);
+    void changePassword(String email, ChangePasswordRequestDTO req);
     void sendVerificationEmail(String email);
     Optional<Member> getMemberById(Long id);
     Optional<Member> getMemberByEmail(String email);
