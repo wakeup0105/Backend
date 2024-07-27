@@ -8,6 +8,7 @@ import hackerton.wakeup.member.entity.dto.request.ChangePasswordRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.FindAccountRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
+import hackerton.wakeup.member.entity.dto.response.JwtTokenResponseDTO;
 import hackerton.wakeup.member.entity.dto.response.MyInfoResponseDTO;
 import hackerton.wakeup.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -31,17 +32,17 @@ public class MemberController {
     private String expirationTime;
 
     @PostMapping("/signup")
-    public ResponseEntity<String> join(@Valid @RequestBody JoinRequestDTO req){
+    public ResponseEntity<JwtTokenResponseDTO> join(@Valid @RequestBody JoinRequestDTO req){
         if (memberService.checkEmailDuplication(req.getEmail())){
-            return new ResponseEntity<>("이메일 중복", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         if (!req.getPassword().equals(req.getCheckPassword())){
-            return new ResponseEntity<>("비밀번호 불일치", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         memberService.joinMember(req);
         characterService.initCharacter(memberService.getMemberByEmail(req.getEmail()).get());
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
-        return ResponseEntity.ok("회원가입 성공, Token: " + token);
+        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
     }
 
     @PostMapping("/login")
