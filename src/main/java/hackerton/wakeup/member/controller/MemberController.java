@@ -32,6 +32,7 @@ public class MemberController {
     private String expirationTime;
 
     @PostMapping("/signup")
+    @ResponseBody
     public ResponseEntity<JwtTokenResponseDTO> join(@Valid @RequestBody JoinRequestDTO req){
         if (memberService.checkEmailDuplication(req.getEmail())){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -46,6 +47,7 @@ public class MemberController {
     }
 
     @PostMapping("/login")
+    @ResponseBody
     public ResponseEntity<JwtTokenResponseDTO> login(@Valid @RequestBody LoginRequestDTO req){
         Member member = memberService.loginMember(req);
 
@@ -57,6 +59,7 @@ public class MemberController {
     }
 
     @PostMapping("/find-account")
+    @ResponseBody
     public ResponseEntity<JwtTokenResponseDTO> findAccount(@Valid @RequestBody FindAccountRequestDTO req){
         if (!memberService.checkEmailDuplication(req.getEmail())){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
