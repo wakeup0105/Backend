@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "OwnEyesTable")
+@Table(name = "OwnEyesAvatar")
 @Builder
 @Getter
 @NoArgsConstructor
