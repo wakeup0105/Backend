@@ -25,6 +25,6 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
 
     @Override
     public boolean isOwnEyesAvatarExists(Long eyes_id) {
-        return false;
+        return ownEyesAvatarRepository.existsByEyes(eyes_id);
     }
 }
