@@ -3,6 +3,7 @@ package hackerton.wakeup.eyes.own.service;
 import hackerton.wakeup.character.entity.CharacterId;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
 import hackerton.wakeup.eyes.own.repository.OwnEyesAvatarRepository;
+import hackerton.wakeup.eyes.part.entity.Eyes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,7 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
     }
 
     @Override
-    public boolean isOwnEyesAvatarExists(Long eyes_id) {
-        return ownEyesAvatarRepository.existsByEyes(eyes_id);
+    public boolean isOwnEyesAvatarExists(Eyes eye) {
+        return ownEyesAvatarRepository.existsByEyes(eye);
     }
 }
