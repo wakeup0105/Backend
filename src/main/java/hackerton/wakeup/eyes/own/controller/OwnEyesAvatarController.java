@@ -29,7 +29,7 @@ public class OwnEyesAvatarController {
     public ResponseEntity<List<OwnEyesAvatar>> getAllOwnEyesAvatars(Authentication auth) {
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         Character character = characterService.getByMemberId(member.getId());
-        ownEyesAvatarService.getAllOwnEyesAvatars(character.getId());
-        return ;
+        List<OwnEyesAvatar> allOwnEyesAvatars = ownEyesAvatarService.getAllOwnEyesAvatars(character.getId());
+        return ResponseEntity.ok(allOwnEyesAvatars);
     }
 }

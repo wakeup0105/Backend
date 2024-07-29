@@ -1,7 +1,7 @@
 package hackerton.wakeup.eyes.own.service;
 
+import hackerton.wakeup.character.entity.CharacterId;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
-import hackerton.wakeup.eyes.own.entity.OwnEyesAvatarId;
 import hackerton.wakeup.eyes.own.repository.OwnEyesAvatarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -19,7 +19,7 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
     private final OwnEyesAvatarRepository ownEyesAvatarRepository;
 
     @Override
-    public List<OwnEyesAvatar> getAllOwnEyesAvatars(OwnEyesAvatarId id) {
+    public List<OwnEyesAvatar> getAllOwnEyesAvatars(CharacterId id) {
         return ownEyesAvatarRepository.findAllById(id);
     }
 
