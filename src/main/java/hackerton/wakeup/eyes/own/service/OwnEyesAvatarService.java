@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface OwnEyesAvatarService {
     List<OwnEyesAvatar> getAllOwnEyesAvatars(OwnEyesAvatarId id);
+    boolean isOwnEyesAvatarExists(Long eyes_id);
 }
