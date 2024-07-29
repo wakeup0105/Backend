@@ -22,7 +22,7 @@ public class OwnEyesAvatar {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumns({
             @JoinColumn(name = "character_id", referencedColumnName = "id"),
-            @JoinColumn(name = "member_id", referencedColumnName = "member")
+            @JoinColumn(name = "member_id", referencedColumnName = "member_id")
     })
     private Character character;
 
