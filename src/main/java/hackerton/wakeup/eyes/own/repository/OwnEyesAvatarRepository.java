@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface OwnEyesAvatarRepository extends JpaRepository<OwnEyesAvatar, OwnEyesAvatarId> {
     List<OwnEyesAvatar> findAllById(OwnEyesAvatarId id);
+    boolean existsByEyes(Long eyes_id);
 }
