@@ -14,20 +14,24 @@ import lombok.*;
 @AllArgsConstructor
 public class OwnEyesAvatar {
 
-    @EmbeddedId
-    private OwnEyesAvatarId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @JsonBackReference
-    @MapsId("characterId")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumns({
-            @JoinColumn(name = "character_id", referencedColumnName = "id"),
-            @JoinColumn(name = "member_id", referencedColumnName = "member_id")
-    })
-    private Character character;
-
-    @JsonBackReference
+    @MapsId("eyesId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "eyes_id")
     private Eyes eyes;
+
+    @JsonBackReference
+    @MapsId("memberId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member", referencedColumnName = "member_id")
+    private Character characterMemberId;
+
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "character_id", referencedColumnName = "id")
+    private Character characterId;
 }

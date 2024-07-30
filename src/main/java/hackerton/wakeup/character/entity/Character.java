@@ -39,6 +39,6 @@ public class Character {
     private String body;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "characterMemberId", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OwnEyesAvatar> ownEyesAvatars;
 }
