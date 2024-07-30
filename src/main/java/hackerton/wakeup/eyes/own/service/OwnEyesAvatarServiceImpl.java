@@ -21,7 +21,7 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
 
     @Override
     public List<OwnEyesAvatar> getAllOwnEyesAvatars(CharacterId id) {
-        return ownEyesAvatarRepository.findAllByIdCharacterId(id);
+        return ownEyesAvatarRepository.findAllByCharacterId(id);
     }
 
     @Override

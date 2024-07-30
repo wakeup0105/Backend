@@ -25,11 +25,9 @@ public class OwnEyesAvatar {
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member", referencedColumnName = "member_id")
-    private Character characterMemberId;
-
-    @JsonBackReference
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "character_id", referencedColumnName = "id")
-    private Character characterId;
+    @JoinColumns({
+            @JoinColumn(name = "character", referencedColumnName = "id"),
+            @JoinColumn(name = "member", referencedColumnName = "member_id")
+    })
+    private Character character;
 }

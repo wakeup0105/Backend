@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface OwnEyesAvatarRepository extends JpaRepository<OwnEyesAvatar, Long> {
-    List<OwnEyesAvatar> findAllByIdCharacterId(CharacterId id);
+    List<OwnEyesAvatar> findAllByCharacterId(CharacterId id);
     boolean existsByEyes(Eyes eye);
 }
