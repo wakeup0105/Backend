@@ -19,13 +19,11 @@ public class OwnEyesAvatar {
     private Long id;
 
     @JsonBackReference
-    @MapsId("eyesId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "eyes_id")
     private Eyes eyes;
 
     @JsonBackReference
-    @MapsId("memberId")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member", referencedColumnName = "member_id")
     private Character characterMemberId;
