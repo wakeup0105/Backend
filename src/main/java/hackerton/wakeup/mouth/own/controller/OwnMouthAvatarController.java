@@ -24,7 +24,7 @@ public class OwnMouthAvatarController {
     private final MemberService memberService;
     private final CharacterService characterService;
 
-    @GetMapping("/own")
+    @GetMapping("/owns")
     @ResponseBody
     public ResponseEntity<List<AllOwnMouthResponseDTO>> getAllOwnMouthAvatar(Authentication auth) {
         Member member = memberService.getMemberByEmail(auth.getName()).get();
