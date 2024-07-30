@@ -11,5 +11,6 @@ public class OwnMouthDtoConverter {
         dto.setCharacterId(res.getCharacter().getId().getId());
         dto.setName(res.getMouth().getName());
         dto.setPrice(res.getMouth().getPrice());
+        return dto;
     }
 }
