@@ -3,6 +3,7 @@ package hackerton.wakeup.eyes.own.controller;
 import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.character.service.CharacterService;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
+import hackerton.wakeup.eyes.own.entity.dto.response.AllOwnEyesResponseDTO;
 import hackerton.wakeup.eyes.own.service.OwnEyesAvatarService;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.service.MemberService;
@@ -26,10 +27,10 @@ public class OwnEyesAvatarController {
 
     @GetMapping("/owns")
     @ResponseBody
-    public ResponseEntity<List<OwnEyesAvatar>> getAllOwnEyesAvatars(Authentication auth) {
+    public ResponseEntity<List<AllOwnEyesResponseDTO>> getAllOwnEyesAvatars(Authentication auth) {
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         Character character = characterService.getByMemberId(member.getId());
-        List<OwnEyesAvatar> allOwnEyesAvatars = ownEyesAvatarService.getAllOwnEyesAvatars(character.getId());
+        List<AllOwnEyesResponseDTO> allOwnEyesAvatars = ownEyesAvatarService.getAllOwnEyesAvatars(character.getId());
         return ResponseEntity.ok(allOwnEyesAvatars);
     }
 }
