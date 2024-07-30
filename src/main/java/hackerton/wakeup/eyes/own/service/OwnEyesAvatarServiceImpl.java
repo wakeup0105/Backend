@@ -30,7 +30,7 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
     }
 
     @Override
-    public boolean isOwnEyesAvatarExists(Eyes eye) {
-        return ownEyesAvatarRepository.existsByEyes(eye);
+    public boolean isOwnEyesAvatarExists(String name) {
+        return ownEyesAvatarRepository.existsByEyes_Name(name);
     }
 }

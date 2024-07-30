@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface OwnEyesAvatarService {
     List<AllOwnEyesResponseDTO> getAllOwnEyesAvatars(CharacterId id);
-    boolean isOwnEyesAvatarExists(Eyes eye);
+    boolean isOwnEyesAvatarExists(String name);
 }

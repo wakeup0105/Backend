@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface OwnEyesAvatarRepository extends JpaRepository<OwnEyesAvatar, Long> {
     List<OwnEyesAvatar> findAllByCharacterId(CharacterId id);
-    boolean existsByEyes(Eyes eye);
+    boolean existsByEyes_Name(String name);
 }
