@@ -9,4 +9,5 @@ import lombok.Setter;
 public class AllOwnEyesResponseDTO {
     private Long id;
     private Character character;
+    private Eyes eyes;
 }
