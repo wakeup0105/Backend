@@ -1,21 +1,24 @@
-package hackerton.wakeup.eyes.part.entity;
+package hackerton.wakeup.head.part.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
+import hackerton.wakeup.head.own.entity.OwnHeadAvatar;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
-@Table(name = "Eyes")
+@Table(name = "Head")
 @Builder
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Eyes {
+public class Head {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,6 +30,6 @@ public class Eyes {
     private String price;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "eyes", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OwnEyesAvatar> ownEyesAvatars;
+    @OneToMany(mappedBy = "head", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OwnHeadAvatar> ownheadAvatars;
 }
