@@ -28,9 +28,4 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
                 .map(OwnEyesDtoConverter::allOwnEyesResponseConverter)
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public boolean isOwnEyesAvatarExists(String name) {
-        return ownEyesAvatarRepository.existsByEyes_Name(name);
-    }
 }

@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface OwnMouthAvatarService {
     List<AllOwnMouthResponseDTO> getAllOwnMouthsAvatar(CharacterId id);
-    boolean isOwnMouthAvatarExists(String name);
 }

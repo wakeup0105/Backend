@@ -8,5 +8,4 @@ import java.util.List;
 
 public interface OwnMouthAvatarRepository extends JpaRepository<OwnMouthAvatar, Long> {
     List<OwnMouthAvatar> findAllByCharacterId(CharacterId id);
-    boolean existsByMouth_name(String name);
 }

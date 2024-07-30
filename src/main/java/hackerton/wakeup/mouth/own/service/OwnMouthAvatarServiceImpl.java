@@ -25,9 +25,4 @@ public class OwnMouthAvatarServiceImpl implements OwnMouthAvatarService {
                 .map(OwnMouthDtoConverter::allOwnMouthResponseConverter)
                 .collect(Collectors.toList());
     }
-
-    @Override
-    public boolean isOwnMouthAvatarExists(String name) {
-        return ownMouthAvatarRepository.existsByMouth_name(name);
-    }
 }
