@@ -1,5 +1,6 @@
 package hackerton.wakeup.eyes.own.entity.dto.response;
 
+import hackerton.wakeup.eyes.part.entity.Eyes;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,4 +8,5 @@ import lombok.Setter;
 @Setter
 public class AllOwnEyesResponseDTO {
     private Long id;
+    private Character character;
 }
