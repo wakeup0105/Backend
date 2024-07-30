@@ -8,8 +8,9 @@ public class OwnEyesDtoConverter {
     public static AllOwnEyesResponseDTO allOwnEyesResponseConverter(OwnEyesAvatar res){
         AllOwnEyesResponseDTO dto = new AllOwnEyesResponseDTO();
         dto.setId(res.getId());
-        dto.setCharacter(res.getCharacter());
-        dto.setEyes(res.getEyes());
+        dto.setCharacterId(res.getCharacter().getId().getId());
+        dto.setName(res.getEyes().getName());
+        dto.setPrice(res.getEyes().getPrice());
         return dto;
     }
 }

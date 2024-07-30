@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class AllOwnEyesResponseDTO {
     private Long id;
-    private Character character;
-    private Eyes eyes;
+    private Long characterId;
+    private String name;
+    private String price;
 }
