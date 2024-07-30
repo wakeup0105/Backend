@@ -1,11 +1,11 @@
-package hackerton.wakeup.eyes.own.entity.dto.response;
+package hackerton.wakeup.mouth.own.entity.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AllOwnEyesResponseDTO {
+public class AllOwnMouthResponseDTO {
     private Long id;
     private Long characterId;
     private String name;
