@@ -2,7 +2,7 @@ package hackerton.wakeup.mouth.own.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import hackerton.wakeup.character.entity.Character;
-import hackerton.wakeup.mouth.part.entity.Mouth;
+import hackerton.wakeup.eyes.part.entity.Mouth;
 import jakarta.persistence.*;
 import lombok.*;
 

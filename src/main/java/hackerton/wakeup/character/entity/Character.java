@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
 import hackerton.wakeup.member.entity.Member;
+import hackerton.wakeup.mouth.own.entity.OwnMouthAvatar;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -41,4 +42,8 @@ public class Character {
     @JsonManagedReference
     @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OwnEyesAvatar> ownEyesAvatars;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "character", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<OwnMouthAvatar> ownMouthAvatars;
 }
