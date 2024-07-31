@@ -30,4 +30,6 @@ public class MemberInfo {
 
     @NotBlank
     private String tag;
+
+    private String introduction;
 }
