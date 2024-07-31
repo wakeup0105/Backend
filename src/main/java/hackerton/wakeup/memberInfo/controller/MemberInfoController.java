@@ -22,7 +22,7 @@ public class MemberInfoController {
     @PostMapping("/set-nickname")
     public ResponseEntity<String> setNickname(@Valid @RequestBody SetNicknameRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
-        String resultNickname = memberInfoService.settingNickname(member, req.getNickname());
+        String resultNickname = memberInfoService.settingNickname(member, req);
         return ResponseEntity.ok("닉네임 설정 성공: " + resultNickname);
     }
 
