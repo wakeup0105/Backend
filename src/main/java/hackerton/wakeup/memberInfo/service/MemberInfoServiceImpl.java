@@ -28,24 +28,28 @@ public class MemberInfoServiceImpl implements MemberInfoService{
     }
 
     @Override
+    public void initMemberInfo(Member member) {
+        String tag = "0000";
+        while (memberInfoRepository.existsByNicknameAndTag("사용자", tag)){
+            tag = RandomStringUtils.randomNumeric(4);
+        }
+        MemberInfoId memberInfoId = MemberInfoId.builder().id(member.getId()).member(member.getId()).build();
+        memberInfoRepository.save(MemberInfo.builder().id(memberInfoId)
+                .member(member)
+                .nickname("사용자")
+                .tag(tag)
+                .introduction(null).build());
+    }
+
+    @Override
     public String settingNickname(Member member, SetNicknameRequestDTO req) {
         String tag = "0000";
         while (memberInfoRepository.existsByNicknameAndTag(req.getNickname(), tag)){
             tag = RandomStringUtils.randomNumeric(4);
         }
         MemberInfoId memberInfoId = MemberInfoId.builder().id(member.getId()).member(member.getId()).build();
-        MemberInfo findMemberInfo = memberInfoRepository.findById(memberInfoId).orElse(null);
-        if (findMemberInfo == null){
-            memberInfoRepository.save(MemberInfo.builder()
-                    .id(memberInfoId)
-                    .member(member)
-                    .nickname(req.getNickname())
-                    .tag(tag)
-                    .introduction(null).build());
-        }
-        else {
-            memberInfoRepository.save(MemberInfoDtoConverter.setNicknameRequestConverter(findMemberInfo, req, tag));
-        }
+        MemberInfo findMemberInfo = memberInfoRepository.findById(memberInfoId).get();
+        memberInfoRepository.save(MemberInfoDtoConverter.setNicknameRequestConverter(findMemberInfo, req, tag));
         return req.getNickname() + "#" + tag;
     }
 
