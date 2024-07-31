@@ -51,7 +51,8 @@ public class MemberInfoServiceImpl implements MemberInfoService{
 
     @Override
     public String settingIntroduction(Member member, SetIntroductionRequestDTO req) {
-        return "";
+        memberInfoRepository.save(MemberInfoDtoConverter.setIntroductionRequestConverter(member.getMemberInfo(), req));
+        return "한 줄 소개 설정 성공: " + req.getIntroduction();
     }
 
     @Override
