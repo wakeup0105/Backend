@@ -4,6 +4,7 @@ import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.memberInfo.entity.MemberInfo;
 import hackerton.wakeup.memberInfo.entity.MemberInfoId;
 import hackerton.wakeup.memberInfo.entity.dto.MemberInfoDtoConverter;
+import hackerton.wakeup.memberInfo.entity.dto.request.SetIntroductionRequestDTO;
 import hackerton.wakeup.memberInfo.entity.dto.request.SetNicknameRequestDTO;
 import hackerton.wakeup.memberInfo.repository.MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,11 @@ public class MemberInfoServiceImpl implements MemberInfoService{
             memberInfoRepository.save(MemberInfoDtoConverter.setNicknameRequestConverter(findMemberInfo, req, tag));
         }
         return req.getNickname() + "#" + tag;
+    }
+
+    @Override
+    public String settingIntroduction(Member member, SetIntroductionRequestDTO req) {
+        return "";
     }
 
     @Override
