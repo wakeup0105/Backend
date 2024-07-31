@@ -20,14 +20,14 @@ public class MemberInfoController {
     private final MemberInfoService memberInfoService;
     private final MemberService memberService;
 
-    @PostMapping("/set-nickname")
+    @PutMapping("/set-nickname")
     public ResponseEntity<String> setNickname(@Valid @RequestBody SetNicknameRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         String resultNickname = memberInfoService.settingNickname(member, req);
         return ResponseEntity.ok("닉네임 설정 성공: " + resultNickname);
     }
 
-    @PostMapping("/set-introduction")
+    @PutMapping("/set-introduction")
     public ResponseEntity<String> setIntroduction(@Valid @RequestBody SetIntroductionRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         String resultIntroduction = memberInfoService.settingIntroduction(member, req);
