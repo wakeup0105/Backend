@@ -3,6 +3,7 @@ package hackerton.wakeup.memberInfo.controller;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.service.MemberService;
 import hackerton.wakeup.memberInfo.entity.MemberInfo;
+import hackerton.wakeup.memberInfo.entity.dto.request.SetIntroductionRequestDTO;
 import hackerton.wakeup.memberInfo.entity.dto.request.SetNicknameRequestDTO;
 import hackerton.wakeup.memberInfo.service.MemberInfoService;
 import jakarta.validation.Valid;
@@ -24,6 +25,13 @@ public class MemberInfoController {
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         String resultNickname = memberInfoService.settingNickname(member, req);
         return ResponseEntity.ok("닉네임 설정 성공: " + resultNickname);
+    }
+
+    @PostMapping("/set-introduction")
+    public ResponseEntity<String> setIntroduction(@Valid @RequestBody SetIntroductionRequestDTO req, Authentication auth){
+        Member member = memberService.getMemberByEmail(auth.getName()).get();
+        String resultIntroduction = memberInfoService.settingIntroduction(member, req);
+        return ResponseEntity.ok("소개 설정 성공: " + resultIntroduction);
     }
 
     @GetMapping("/info")
