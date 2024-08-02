@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class BuyEyesResponseDTO {
     private String nickname;
+    private String avatarName;
 }
