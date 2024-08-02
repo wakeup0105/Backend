@@ -1,6 +1,8 @@
 package hackerton.wakeup.eyes.own.service;
 
+import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.character.entity.CharacterId;
+import hackerton.wakeup.character.repository.CharacterRepository;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
 import hackerton.wakeup.eyes.own.entity.dto.OwnEyesDtoConverter;
 import hackerton.wakeup.eyes.own.entity.dto.response.AllOwnEyesResponseDTO;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
 
     private final MemberRepository memberRepository;
+    private final CharacterRepository characterRepository;
     private final OwnEyesAvatarRepository ownEyesAvatarRepository;
     private final EyesRepository eyesRepository;
 
@@ -50,5 +53,14 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
                 .character(member.getCharacter()).build());
         OwnEyesAvatar save = ownEyesAvatarRepository.save(OwnEyesDtoConverter.saveOwnEyesAvatar(member, findAvatar));
         return OwnEyesDtoConverter.buyEyesResponseConverter(save);
+    }
+
+    @Override
+    public boolean equipEyesAvatar(Member member, String name) {
+        Eyes findAvatar = eyesRepository.findByName(name);
+        OwnEyesAvatar oneByEyes = ownEyesAvatarRepository.findOneByEyes(findAvatar);
+        Character character = member.getCharacter();
+        if (findAvatar == null || oneByEyes != null) return false;
+        return true;
     }
 }

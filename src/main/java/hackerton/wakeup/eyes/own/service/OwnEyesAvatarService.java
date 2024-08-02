@@ -11,4 +11,5 @@ import java.util.List;
 public interface OwnEyesAvatarService {
     List<AllOwnEyesResponseDTO> getAllOwnEyesAvatars(CharacterId id);
     BuyEyesResponseDTO buyEyes(Member member, String name);
+    boolean equipEyesAvatar(Member member, String name);
 }
