@@ -39,7 +39,7 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
         if (findAvatar == null || Integer.parseInt(findAvatar.getPrice()) > member.getPoint()) {
             return null;
         }
-        OwnEyesAvatar save = ownEyesAvatarRepository.save();
+        OwnEyesAvatar save = ownEyesAvatarRepository.save(OwnEyesDtoConverter.saveOwnEyesAvatar(member, findAvatar));
         return OwnEyesDtoConverter.buyEyesResponseConverter(save);
     }
 }
