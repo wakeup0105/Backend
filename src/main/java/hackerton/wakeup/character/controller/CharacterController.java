@@ -3,7 +3,7 @@ package hackerton.wakeup.character.controller;
 import hackerton.wakeup.body.own.entity.dto.response.BuyBodyResponseDTO;
 import hackerton.wakeup.body.own.service.OwnBodyAvatarService;
 import hackerton.wakeup.character.entity.Character;
-import hackerton.wakeup.character.entity.dto.request.BuyRequestDTO;
+import hackerton.wakeup.character.entity.dto.request.CustomizingRequestDTO;
 import hackerton.wakeup.character.entity.dto.response.CustomizeResponseDTO;
 import hackerton.wakeup.character.entity.dto.response.GrowResponseDTO;
 import hackerton.wakeup.character.service.CharacterService;
@@ -59,7 +59,7 @@ public class CharacterController {
 
     @PostMapping("/buy")
     @ResponseBody
-    public ResponseEntity<?> buy(@Valid @RequestBody BuyRequestDTO req, Authentication auth){
+    public ResponseEntity<?> buy(@Valid @RequestBody CustomizingRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         switch (req.getPart()){
             case "eyes": {

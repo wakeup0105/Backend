@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class BuyRequestDTO {
+public class CustomizingRequestDTO {
     private String part;
     private String name;
 }
