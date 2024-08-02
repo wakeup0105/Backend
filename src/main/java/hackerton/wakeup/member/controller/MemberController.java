@@ -11,6 +11,7 @@ import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.entity.dto.response.JwtTokenResponseDTO;
 import hackerton.wakeup.member.entity.dto.response.MyInfoResponseDTO;
 import hackerton.wakeup.member.service.MemberService;
+import hackerton.wakeup.memberInfo.service.MemberInfoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,6 +27,7 @@ public class MemberController {
     private final MemberService memberService;
     private final EmailVerifyService emailVerifyService;
     private final CharacterService characterService;
+    private final MemberInfoService memberInfoService;
     @Value("${spring.jwt.secretKey}")
     private String secretKey;
     @Value("${spring.jwt.expirationTime}")
@@ -42,6 +44,7 @@ public class MemberController {
         }
         memberService.joinMember(req);
         characterService.initCharacter(memberService.getMemberByEmail(req.getEmail()).get());
+        memberInfoService.initMemberInfo(memberService.getMemberByEmail(req.getEmail()).get());
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
         return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
     }

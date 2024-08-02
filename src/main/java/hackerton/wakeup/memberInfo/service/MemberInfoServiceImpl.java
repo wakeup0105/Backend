@@ -3,6 +3,9 @@ package hackerton.wakeup.memberInfo.service;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.memberInfo.entity.MemberInfo;
 import hackerton.wakeup.memberInfo.entity.MemberInfoId;
+import hackerton.wakeup.memberInfo.entity.dto.MemberInfoDtoConverter;
+import hackerton.wakeup.memberInfo.entity.dto.request.SetIntroductionRequestDTO;
+import hackerton.wakeup.memberInfo.entity.dto.request.SetNicknameRequestDTO;
 import hackerton.wakeup.memberInfo.repository.MemberInfoRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -25,19 +28,35 @@ public class MemberInfoServiceImpl implements MemberInfoService{
     }
 
     @Override
-    public String settingNickname(Member member, String nickname) {
+    public void initMemberInfo(Member member) {
         String tag = "0000";
-        while (memberInfoRepository.existsByNicknameAndTag(nickname, tag)){
+        while (memberInfoRepository.existsByNicknameAndTag("사용자", tag)){
             tag = RandomStringUtils.randomNumeric(4);
         }
         MemberInfoId memberInfoId = MemberInfoId.builder().id(member.getId()).member(member.getId()).build();
-        memberInfoRepository.save(MemberInfo.builder()
-                .id(memberInfoId)
+        memberInfoRepository.save(MemberInfo.builder().id(memberInfoId)
                 .member(member)
-                .nickname(nickname)
+                .nickname("사용자")
                 .tag(tag)
-                .build());
-        return nickname + "#" + tag;
+                .introduction(null).build());
+    }
+
+    @Override
+    public String settingNickname(Member member, SetNicknameRequestDTO req) {
+        String tag = "0000";
+        while (memberInfoRepository.existsByNicknameAndTag(req.getNickname(), tag)){
+            tag = RandomStringUtils.randomNumeric(4);
+        }
+        MemberInfoId memberInfoId = MemberInfoId.builder().id(member.getId()).member(member.getId()).build();
+        MemberInfo findMemberInfo = memberInfoRepository.findById(memberInfoId).get();
+        memberInfoRepository.save(MemberInfoDtoConverter.setNicknameRequestConverter(findMemberInfo, req, tag));
+        return req.getNickname() + "#" + tag;
+    }
+
+    @Override
+    public String settingIntroduction(Member member, SetIntroductionRequestDTO req) {
+        memberInfoRepository.save(MemberInfoDtoConverter.setIntroductionRequestConverter(member.getMemberInfo(), req));
+        return req.getIntroduction();
     }
 
     @Override
