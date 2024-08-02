@@ -37,9 +37,9 @@ public class OwnBodyAvatarServiceImpl implements OwnBodyAvatarService {
     @Override
     public BuyBodyResponseDTO buyBody(Member member, String name) {
         Body findAvatar = bodyRepository.findByName(name);
-        if (findAvatar == null || findAvatar.getPrice() > member.getPoint()) {
-            return null;
-        }
+        OwnBodyAvatar oneByBody = ownBodyAvatarRepository.findOneByBody(findAvatar);
+        if (findAvatar == null || oneByBody != null) return null;
+        if (findAvatar.getPrice() > member.getPoint()) return null;
         memberRepository.save(Member.builder()
                 .id(member.getId())
                 .email(member.getEmail())

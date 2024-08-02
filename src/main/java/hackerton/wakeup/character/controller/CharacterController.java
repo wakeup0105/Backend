@@ -64,22 +64,22 @@ public class CharacterController {
         switch (req.getPart()){
             case "eyes": {
                 BuyEyesResponseDTO res = ownEyesAvatarService.buyEyes(member, req.getName());
-                if (res==null) return new ResponseEntity<>("포인트 부족", HttpStatus.BAD_REQUEST);
+                if (res==null) return new ResponseEntity<>("포인트 부족 또는 중복", HttpStatus.BAD_REQUEST);
                 return ResponseEntity.ok(res);
             }
             case "mouth": {
                 BuyMouthResponseDTO res = ownMouthAvatarService.buyMouth(member, req.getName());
-                if (res == null) return new ResponseEntity<>("포인트 부족", HttpStatus.BAD_REQUEST);
+                if (res == null) return new ResponseEntity<>("포인트 부족 또는 중복", HttpStatus.BAD_REQUEST);
                 return ResponseEntity.ok(res);
             }
             case "head": {
                 BuyHeadResponseDTO res = ownHeadAvatarService.buyHead(member, req.getName());
-                if (res == null) return new ResponseEntity<>("포인트 부족", HttpStatus.BAD_REQUEST);
+                if (res == null) return new ResponseEntity<>("포인트 부족 또는 중복", HttpStatus.BAD_REQUEST);
                 return ResponseEntity.ok(res);
             }
             case "body": {
                 BuyBodyResponseDTO res = ownBodyAvatarService.buyBody(member, req.getName());
-                if (res == null) return new ResponseEntity<>("포인트 부족", HttpStatus.BAD_REQUEST);
+                if (res == null) return new ResponseEntity<>("포인트 부족 또는 중복", HttpStatus.BAD_REQUEST);
                 return ResponseEntity.ok(res);
             }
             default: return new ResponseEntity<>("잘못된 요청", HttpStatus.BAD_REQUEST);

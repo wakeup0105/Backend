@@ -37,9 +37,9 @@ public class OwnHeadAvatarServiceImpl implements OwnHeadAvatarService {
     @Override
     public BuyHeadResponseDTO buyHead(Member member, String name) {
         Head findAvatar = headRepository.findByName(name);
-        if (findAvatar == null || findAvatar.getPrice() > member.getPoint()) {
-            return null;
-        }
+        OwnHeadAvatar oneByHead = ownHeadAvatarRepository.findOneByHead(findAvatar);
+        if (findAvatar == null || oneByHead != null) return null;
+        if (findAvatar.getPrice() > member.getPoint()) return null;
         memberRepository.save(Member.builder()
                 .id(member.getId())
                 .email(member.getEmail())

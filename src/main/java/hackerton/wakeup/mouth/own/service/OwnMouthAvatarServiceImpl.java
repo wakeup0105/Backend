@@ -37,9 +37,9 @@ public class OwnMouthAvatarServiceImpl implements OwnMouthAvatarService {
     @Override
     public BuyMouthResponseDTO buyMouth(Member member, String name) {
         Mouth findAvatar = mouthRepository.findByName(name);
-        if (findAvatar == null || findAvatar.getPrice() > member.getPoint()) {
-            return null;
-        }
+        OwnMouthAvatar oneByMouth = ownMouthAvatarRepository.findOneByMouth(findAvatar);
+        if (findAvatar == null || oneByMouth != null) return null;
+        if (findAvatar.getPrice() > member.getPoint()) return null;
         memberRepository.save(Member.builder()
                 .id(member.getId())
                 .email(member.getEmail())
