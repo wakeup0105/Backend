@@ -51,7 +51,7 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
                 .point(member.getPoint() - findAvatar.getPrice())
                 .memberInfo(member.getMemberInfo())
                 .character(member.getCharacter()).build());
-        OwnEyesAvatar save = ownEyesAvatarRepository.save(OwnEyesDtoConverter.saveOwnEyesAvatar(member, findAvatar));
+        OwnEyesAvatar save = ownEyesAvatarRepository.save(OwnEyesDtoConverter.saveOwnEyesAvatarConverter(member, findAvatar));
         return OwnEyesDtoConverter.buyEyesResponseConverter(save);
     }
 

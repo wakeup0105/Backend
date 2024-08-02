@@ -39,7 +39,7 @@ public class OwnEyesDtoConverter {
                 .ownHeadAvatars(character.getOwnHeadAvatars()).ownBodyAvatars(character.getOwnBodyAvatars()).build();
     }
 
-    public static OwnEyesAvatar saveOwnEyesAvatar(Member member, Eyes eyes){
+    public static OwnEyesAvatar saveOwnEyesAvatarConverter(Member member, Eyes eyes){
         return OwnEyesAvatar.builder()
                 .eyes(eyes)
                 .character(member.getCharacter()).build();

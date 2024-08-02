@@ -40,7 +40,7 @@ public class OwnMouthDtoConverter {
                 .ownHeadAvatars(character.getOwnHeadAvatars()).ownBodyAvatars(character.getOwnBodyAvatars()).build();
     }
 
-    public static OwnMouthAvatar saveOwnMouthAvatar(Member member, Mouth mouth){
+    public static OwnMouthAvatar saveOwnMouthAvatarConverter(Member member, Mouth mouth){
         return OwnMouthAvatar.builder()
                 .mouth(mouth)
                 .character(member.getCharacter()).build();

@@ -50,7 +50,7 @@ public class OwnBodyAvatarServiceImpl implements OwnBodyAvatarService {
                 .point(member.getPoint() - findAvatar.getPrice())
                 .memberInfo(member.getMemberInfo())
                 .character(member.getCharacter()).build());
-        OwnBodyAvatar save = ownBodyAvatarRepository.save(OwnBodyDtoConverter.saveOwnBodyAvatar(member, findAvatar));
+        OwnBodyAvatar save = ownBodyAvatarRepository.save(OwnBodyDtoConverter.saveOwnBodyAvatarConverter(member, findAvatar));
         return OwnBodyDtoConverter.buyBodyResponseConverter(save);
     }
 

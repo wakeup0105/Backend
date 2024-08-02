@@ -50,7 +50,7 @@ public class OwnHeadAvatarServiceImpl implements OwnHeadAvatarService {
                 .point(member.getPoint() - findAvatar.getPrice())
                 .memberInfo(member.getMemberInfo())
                 .character(member.getCharacter()).build());
-        OwnHeadAvatar save = ownHeadAvatarRepository.save(OwnHeadDtoConverter.saveOwnHeadAvatar(member, findAvatar));
+        OwnHeadAvatar save = ownHeadAvatarRepository.save(OwnHeadDtoConverter.saveOwnHeadAvatarConverter(member, findAvatar));
         return OwnHeadDtoConverter.buyHeadResponseConverter(save);
     }
 

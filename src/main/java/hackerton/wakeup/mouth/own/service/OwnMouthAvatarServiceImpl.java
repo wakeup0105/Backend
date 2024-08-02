@@ -50,7 +50,7 @@ public class OwnMouthAvatarServiceImpl implements OwnMouthAvatarService {
                 .point(member.getPoint() - findAvatar.getPrice())
                 .memberInfo(member.getMemberInfo())
                 .character(member.getCharacter()).build());
-        OwnMouthAvatar save = ownMouthAvatarRepository.save(OwnMouthDtoConverter.saveOwnMouthAvatar(member, findAvatar));
+        OwnMouthAvatar save = ownMouthAvatarRepository.save(OwnMouthDtoConverter.saveOwnMouthAvatarConverter(member, findAvatar));
         return OwnMouthDtoConverter.buyMouthResponseConverter(save);
     }
 

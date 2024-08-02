@@ -39,7 +39,7 @@ public class OwnHeadDtoConverter {
                 .ownHeadAvatars(character.getOwnHeadAvatars()).ownBodyAvatars(character.getOwnBodyAvatars()).build();
     }
 
-    public static OwnHeadAvatar saveOwnHeadAvatar(Member member, Head head){
+    public static OwnHeadAvatar saveOwnHeadAvatarConverter(Member member, Head head){
         return OwnHeadAvatar.builder()
                 .head(head)
                 .character(member.getCharacter()).build();
