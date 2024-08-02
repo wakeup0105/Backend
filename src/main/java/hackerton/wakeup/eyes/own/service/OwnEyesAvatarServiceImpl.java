@@ -34,6 +34,11 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
 
     @Override
     public OwnEyesAvatar buyEyes(Member member, String name) {
-        return null;
+        Eyes findAvatar = eyesRepository.findByName(name);
+        if (findAvatar == null || Integer.parseInt(findAvatar.getPrice()) > member.getPoint()) {
+            return null;
+        }
+        OwnEyesAvatar save = ownEyesAvatarRepository.save();
+        return save;
     }
 }
