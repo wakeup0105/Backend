@@ -3,6 +3,8 @@ package hackerton.wakeup.eyes.own.entity.dto;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
 import hackerton.wakeup.eyes.own.entity.dto.response.AllOwnEyesResponseDTO;
 import hackerton.wakeup.eyes.own.entity.dto.response.BuyEyesResponseDTO;
+import hackerton.wakeup.eyes.part.entity.Eyes;
+import hackerton.wakeup.member.entity.Member;
 
 public class OwnEyesDtoConverter {
 
@@ -22,5 +24,11 @@ public class OwnEyesDtoConverter {
         dto.setAvatarName(res.getEyes().getName());
         dto.setPrice(res.getEyes().getPrice());
         dto.setPoint(res.getCharacter().getMember().getPoint());
+    }
+
+    public static OwnEyesAvatar saveOwnEyesAvatar(Member member, Eyes eyes){
+        return OwnEyesAvatar.builder()
+                .eyes(eyes)
+                .character(member.getCharacter()).build();
     }
 }
