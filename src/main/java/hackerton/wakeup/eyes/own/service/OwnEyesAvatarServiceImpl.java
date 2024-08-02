@@ -9,6 +9,7 @@ import hackerton.wakeup.eyes.own.repository.OwnEyesAvatarRepository;
 import hackerton.wakeup.eyes.part.entity.Eyes;
 import hackerton.wakeup.eyes.part.repository.EyesRepository;
 import hackerton.wakeup.member.entity.Member;
+import hackerton.wakeup.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 @Primary
 public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
 
+    private final MemberRepository memberRepository;
     private final OwnEyesAvatarRepository ownEyesAvatarRepository;
     private final EyesRepository eyesRepository;
 
@@ -39,6 +41,13 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
         if (findAvatar == null || findAvatar.getPrice() > member.getPoint()) {
             return null;
         }
+        memberRepository.save(Member.builder()
+                .id(member.getId())
+                .email(member.getEmail())
+                .password(member.getPassword())
+                .point(member.getPoint() - findAvatar.getPrice())
+                .memberInfo(member.getMemberInfo())
+                .character(member.getCharacter()).build());
         OwnEyesAvatar save = ownEyesAvatarRepository.save(OwnEyesDtoConverter.saveOwnEyesAvatar(member, findAvatar));
         return OwnEyesDtoConverter.buyEyesResponseConverter(save);
     }
