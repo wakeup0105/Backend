@@ -59,8 +59,8 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
     public boolean equipEyesAvatar(Member member, String name) {
         Eyes findAvatar = eyesRepository.findByName(name);
         OwnEyesAvatar oneByEyes = ownEyesAvatarRepository.findOneByEyes(findAvatar);
+        if (findAvatar == null || oneByEyes == null) return false;
         Character character = member.getCharacter();
-        if (findAvatar == null || oneByEyes != null) return false;
         characterRepository.save(OwnEyesDtoConverter.equipEyesConverter(character, name));
         return true;
     }

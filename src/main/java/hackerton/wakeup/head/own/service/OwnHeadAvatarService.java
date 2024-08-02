@@ -10,4 +10,5 @@ import java.util.List;
 public interface OwnHeadAvatarService {
     List<AllOwnHeadResponseDTO> getAllOwnHeadAvatar(CharacterId id);
     BuyHeadResponseDTO buyHead(Member member, String name);
+    boolean equipHeadAvatar(Member member, String name);
 }

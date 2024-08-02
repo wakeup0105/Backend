@@ -58,7 +58,7 @@ public class OwnMouthAvatarServiceImpl implements OwnMouthAvatarService {
     public boolean equipMouthAvatar(Member member, String name) {
         Mouth findAvatar = mouthRepository.findByName(name);
         OwnMouthAvatar oneByMouth = ownMouthAvatarRepository.findOneByMouth(findAvatar);
-        if (findAvatar == null || oneByMouth != null) return false;
+        if (findAvatar == null || oneByMouth == null) return false;
         Character character = member.getCharacter();
         characterRepository.save(OwnMouthDtoConverter.equipMouthConverter(character, name));
         return true;
