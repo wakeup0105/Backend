@@ -4,6 +4,7 @@ import hackerton.wakeup.character.entity.CharacterId;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
 import hackerton.wakeup.eyes.own.entity.dto.OwnEyesDtoConverter;
 import hackerton.wakeup.eyes.own.entity.dto.response.AllOwnEyesResponseDTO;
+import hackerton.wakeup.eyes.own.entity.dto.response.BuyEyesResponseDTO;
 import hackerton.wakeup.eyes.own.repository.OwnEyesAvatarRepository;
 import hackerton.wakeup.eyes.part.entity.Eyes;
 import hackerton.wakeup.eyes.part.repository.EyesRepository;
@@ -33,12 +34,12 @@ public class OwnEyesAvatarServiceImpl implements OwnEyesAvatarService {
     }
 
     @Override
-    public OwnEyesAvatar buyEyes(Member member, String name) {
+    public BuyEyesResponseDTO buyEyes(Member member, String name) {
         Eyes findAvatar = eyesRepository.findByName(name);
         if (findAvatar == null || Integer.parseInt(findAvatar.getPrice()) > member.getPoint()) {
             return null;
         }
         OwnEyesAvatar save = ownEyesAvatarRepository.save();
-        return save;
+        return OwnEyesDtoConverter.buyEyesResponseConverter(save);
     }
 }
