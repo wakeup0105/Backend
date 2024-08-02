@@ -8,4 +8,5 @@ import lombok.Setter;
 public class BuyEyesResponseDTO {
     private String nickname;
     private String avatarName;
+    private int price;
 }
