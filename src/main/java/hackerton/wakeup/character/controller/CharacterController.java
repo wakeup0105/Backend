@@ -1,11 +1,15 @@
 package hackerton.wakeup.character.controller;
 
+import hackerton.wakeup.body.own.service.OwnBodyAvatarService;
 import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.character.entity.dto.response.CustomizeResponseDTO;
 import hackerton.wakeup.character.entity.dto.response.GrowResponseDTO;
 import hackerton.wakeup.character.service.CharacterService;
+import hackerton.wakeup.eyes.own.service.OwnEyesAvatarService;
+import hackerton.wakeup.head.own.service.OwnHeadAvatarService;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.service.MemberService;
+import hackerton.wakeup.mouth.own.service.OwnMouthAvatarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -20,6 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class CharacterController {
     private final CharacterService characterService;
     private final MemberService memberService;
+    private final OwnEyesAvatarService ownEyesAvatarService;
+    private final OwnMouthAvatarService ownMouthAvatarService;
+    private final OwnHeadAvatarService ownHeadAvatarService;
+    private final OwnBodyAvatarService ownBodyAvatarService;
 
     @GetMapping("/info")
     @ResponseBody
