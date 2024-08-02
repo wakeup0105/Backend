@@ -9,4 +9,5 @@ public class BuyEyesResponseDTO {
     private String nickname;
     private String avatarName;
     private int price;
+    private int point;
 }
