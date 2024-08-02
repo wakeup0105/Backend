@@ -27,7 +27,7 @@ public class Head {
     private String name;
 
     @NotNull
-    private String price;
+    private int price;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "head", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

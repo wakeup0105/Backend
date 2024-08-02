@@ -25,7 +25,7 @@ public class Mouth {
     private String name;
 
     @NotNull
-    private String price;
+    private int price;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "mouth", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

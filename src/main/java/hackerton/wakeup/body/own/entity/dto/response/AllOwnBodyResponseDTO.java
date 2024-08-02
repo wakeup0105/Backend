@@ -9,5 +9,5 @@ public class AllOwnBodyResponseDTO {
     private Long id;
     private Long characterId;
     private String name;
-    private String price;
+    private int price;
 }

@@ -24,6 +24,7 @@ public class OwnEyesDtoConverter {
         dto.setAvatarName(res.getEyes().getName());
         dto.setPrice(res.getEyes().getPrice());
         dto.setPoint(res.getCharacter().getMember().getPoint());
+        return dto;
     }
 
     public static OwnEyesAvatar saveOwnEyesAvatar(Member member, Eyes eyes){

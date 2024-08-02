@@ -24,7 +24,7 @@ public class Eyes {
     private String name;
 
     @NotNull
-    private String price;
+    private int price;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "eyes", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
