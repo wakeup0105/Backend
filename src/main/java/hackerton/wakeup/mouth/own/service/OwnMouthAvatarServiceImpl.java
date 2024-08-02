@@ -1,6 +1,8 @@
 package hackerton.wakeup.mouth.own.service;
 
+import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.character.entity.CharacterId;
+import hackerton.wakeup.character.repository.CharacterRepository;
 import hackerton.wakeup.eyes.part.entity.Mouth;
 import hackerton.wakeup.member.entity.Member;
 import hackerton.wakeup.member.repository.MemberRepository;
@@ -25,6 +27,7 @@ import java.util.stream.Collectors;
 public class OwnMouthAvatarServiceImpl implements OwnMouthAvatarService {
     private final MemberRepository memberRepository;
     private final MouthRepository mouthRepository;
+    private final CharacterRepository characterRepository;
     private final OwnMouthAvatarRepository ownMouthAvatarRepository;
 
     @Override
@@ -49,5 +52,15 @@ public class OwnMouthAvatarServiceImpl implements OwnMouthAvatarService {
                 .character(member.getCharacter()).build());
         OwnMouthAvatar save = ownMouthAvatarRepository.save(OwnMouthDtoConverter.saveOwnMouthAvatar(member, findAvatar));
         return OwnMouthDtoConverter.buyMouthResponseConverter(save);
+    }
+
+    @Override
+    public boolean equipMouthAvatar(Member member, String name) {
+        Mouth findAvatar = mouthRepository.findByName(name);
+        OwnMouthAvatar oneByMouth = ownMouthAvatarRepository.findOneByMouth(findAvatar);
+        if (findAvatar == null || oneByMouth != null) return false;
+        Character character = member.getCharacter();
+        characterRepository.save(OwnMouthDtoConverter.equipMouthConverter(character, name));
+        return true;
     }
 }
