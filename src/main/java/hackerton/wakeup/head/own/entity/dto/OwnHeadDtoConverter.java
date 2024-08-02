@@ -1,5 +1,6 @@
 package hackerton.wakeup.head.own.entity.dto;
 
+import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.head.own.entity.OwnHeadAvatar;
 import hackerton.wakeup.head.own.entity.dto.response.AllOwnHeadResponseDTO;
 import hackerton.wakeup.head.own.entity.dto.response.BuyHeadResponseDTO;
@@ -25,6 +26,17 @@ public class OwnHeadDtoConverter {
         dto.setPrice(res.getHead().getPrice());
         dto.setPoint(res.getCharacter().getMember().getPoint());
         return dto;
+    }
+
+    public static Character equipHeadConverter(Character character, String name){
+        return Character.builder()
+                .id(character.getId())
+                .member(character.getMember())
+                .level(character.getLevel())
+                .exp(character.getExp())
+                .eyes(character.getEyes()).mouth(character.getMouth()).head(name).body(character.getBody())
+                .ownEyesAvatars(character.getOwnEyesAvatars()).ownMouthAvatars(character.getOwnMouthAvatars())
+                .ownHeadAvatars(character.getOwnHeadAvatars()).ownBodyAvatars(character.getOwnBodyAvatars()).build();
     }
 
     public static OwnHeadAvatar saveOwnHeadAvatar(Member member, Head head){
