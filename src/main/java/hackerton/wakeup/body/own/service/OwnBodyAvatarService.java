@@ -10,4 +10,5 @@ import java.util.List;
 public interface OwnBodyAvatarService {
     List<AllOwnBodyResponseDTO> getAllOwnBodyAvatars(CharacterId id);
     BuyBodyResponseDTO buyBody(Member member, String name);
+    boolean equipBodyAvatar(Member member, String name);
 }
