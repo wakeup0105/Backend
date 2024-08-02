@@ -7,4 +7,5 @@ import lombok.Setter;
 @Setter
 public class BuyRequestDTO {
     private String part;
+    private String name;
 }
