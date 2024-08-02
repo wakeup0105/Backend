@@ -6,4 +6,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BuyEyesResponseDTO {
+    private String nickname;
 }
