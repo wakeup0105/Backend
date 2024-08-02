@@ -85,4 +85,33 @@ public class CharacterController {
             default: return new ResponseEntity<>("잘못된 요청", HttpStatus.BAD_REQUEST);
         }
     }
+
+    @PostMapping("/equip")
+    @ResponseBody
+    public ResponseEntity<CustomizeResponseDTO> equip(@Valid @RequestBody CustomizingRequestDTO req, Authentication auth){
+        Member member = memberService.getMemberByEmail(auth.getName()).get();
+        switch (req.getPart()){
+            case "eyes": {
+                boolean result = ownEyesAvatarService.equipEyesAvatar(member, req.getName());
+                if (!result) return ResponseEntity.badRequest().build();
+                return ResponseEntity.ok(CustomizeResponseDTO.fromEntity(characterService.getByMemberId(member.getId())));
+            }
+            case "mouth": {
+                boolean result = ownMouthAvatarService.equipMouthAvatar(member, req.getName());
+                if (!result) return ResponseEntity.badRequest().build();
+                return ResponseEntity.ok(CustomizeResponseDTO.fromEntity(characterService.getByMemberId(member.getId())));
+            }
+            case "head": {
+                boolean result = ownHeadAvatarService.equipHeadAvatar(member, req.getName());
+                if (!result) return ResponseEntity.badRequest().build();
+                return ResponseEntity.ok(CustomizeResponseDTO.fromEntity(characterService.getByMemberId(member.getId())));
+            }
+            case "body": {
+                boolean result = ownBodyAvatarService.equipBodyAvatar(member, req.getName());
+                if (!result) return ResponseEntity.badRequest().build();
+                return ResponseEntity.ok(CustomizeResponseDTO.fromEntity(characterService.getByMemberId(member.getId())));
+            }
+            default: return ResponseEntity.badRequest().build();
+        }
+    }
 }
