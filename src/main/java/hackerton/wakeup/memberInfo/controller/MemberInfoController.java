@@ -20,7 +20,7 @@ public class MemberInfoController {
     private final MemberInfoService memberInfoService;
     private final MemberService memberService;
 
-    @PutMapping("/set-nickname")
+    @PatchMapping("/set-nickname")
     public ResponseEntity<String> setNickname(@Valid @RequestBody SetNicknameRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         String resultNickname = memberInfoService.settingNickname(member, req);
