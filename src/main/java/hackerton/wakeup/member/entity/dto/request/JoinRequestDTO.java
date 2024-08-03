@@ -23,7 +23,7 @@ public class JoinRequestDTO {
         return Member.builder()
                 .email(this.email)
                 .password(this.password)
-                .point(0)
+                .point(300)
                 .build();
     }
 }

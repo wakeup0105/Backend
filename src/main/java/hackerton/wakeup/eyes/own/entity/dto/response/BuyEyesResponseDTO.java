@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AllOwnEyesResponseDTO {
-    private Long id;
-    private Long characterId;
-    private String name;
+public class BuyEyesResponseDTO {
+    private String nickname;
+    private String avatarName;
     private int price;
+    private int point;
 }
