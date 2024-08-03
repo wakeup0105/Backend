@@ -27,7 +27,7 @@ public class MemberInfoController {
         return ResponseEntity.ok("닉네임 설정 성공: " + resultNickname);
     }
 
-    @PutMapping("/set-introduction")
+    @PatchMapping("/set-introduction")
     public ResponseEntity<String> setIntroduction(@Valid @RequestBody SetIntroductionRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         String resultIntroduction = memberInfoService.settingIntroduction(member, req);
