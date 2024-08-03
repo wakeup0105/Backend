@@ -74,7 +74,7 @@ public class MemberController {
         return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
     }
 
-    @PutMapping("/change-password")
+    @PatchMapping("/change-password")
     public ResponseEntity<String> changePassword(@Valid @RequestBody ChangePasswordRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         if (!memberService.checkEmailDuplication(member.getEmail())){
@@ -87,7 +87,7 @@ public class MemberController {
         return ResponseEntity.ok("비밀번호 변경 성공");
     }
 
-    @PatchMapping("/send-verification")
+    @PostMapping("/send-verification")
     public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
         memberService.sendVerificationEmail(email);
         return ResponseEntity.ok("인증코드가 이메일로 전송 되었습니다.");
