@@ -87,7 +87,7 @@ public class MemberController {
         return ResponseEntity.ok("비밀번호 변경 성공");
     }
 
-    @PostMapping("/send-verification")
+    @PatchMapping("/send-verification")
     public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
         memberService.sendVerificationEmail(email);
         return ResponseEntity.ok("인증코드가 이메일로 전송 되었습니다.");
