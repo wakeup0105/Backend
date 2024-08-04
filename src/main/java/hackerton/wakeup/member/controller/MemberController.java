@@ -74,7 +74,7 @@ public class MemberController {
         return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
     }
 
-    @PutMapping("/change-password")
+    @PatchMapping("/change-password")
     public ResponseEntity<String> changePassword(@Valid @RequestBody ChangePasswordRequestDTO req, Authentication auth){
         Member member = memberService.getMemberByEmail(auth.getName()).get();
         if (!memberService.checkEmailDuplication(member.getEmail())){
