@@ -65,6 +65,13 @@ public class MemberController {
                 refreshToken.getToken(), refreshExpirationTime));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(@Valid @RequestBody LogoutRequestDTO req){
+        boolean result = memberService.logoutMember(req.getEmail());
+        if (result) return ResponseEntity.ok().build();
+        return ResponseEntity.badRequest().build();
+    }
+
     @PostMapping("/refresh")
     @ResponseBody
     public ResponseEntity<JwtTokenResponseDTO> refreshToken(@RequestBody RefreshRequestDTO refreshToken){
