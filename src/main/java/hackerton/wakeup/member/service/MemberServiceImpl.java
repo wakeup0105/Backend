@@ -73,7 +73,7 @@ public class MemberServiceImpl implements MemberService {
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
         if (optionalMember.isEmpty()) return null;
         Member member = optionalMember.get();
-        Instant instant = Instant.now().plusSeconds(Long.parseLong(refreshExpirationTime));
+        Instant instant = Instant.now().plusMillis(Long.parseLong(refreshExpirationTime));
         String refreshToken = JwtTokenUtil.createRefreshToken(email, secretKey, Long.parseLong(refreshExpirationTime));
         return refreshTokenRepository.save(RefreshTokenConverter.createTokenConverter(refreshToken, member, instant));
     }
