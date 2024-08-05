@@ -79,8 +79,15 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public RefreshToken verifyRefreshToken(String email) {
-        return null;
+    public RefreshToken verifyRefreshToken(String token) {
+        Optional<RefreshToken> byToken = refreshTokenRepository.findByToken(token);
+        if (byToken.isEmpty()) return null;
+        RefreshToken refreshToken = byToken.get();
+        if (refreshToken.getExpiryTime().compareTo(Instant.now()) < 0){
+            refreshTokenRepository.delete(refreshToken);
+            return null;
+        }
+        return refreshToken;
     }
 
     @Override

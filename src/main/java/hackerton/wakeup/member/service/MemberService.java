@@ -13,7 +13,7 @@ public interface MemberService {
     void joinMember(JoinRequestDTO req);
     Member loginMember(LoginRequestDTO req);
     RefreshToken createRefreshToken(String email, Long expiresInSeconds);
-    RefreshToken verifyRefreshToken(String email);
+    RefreshToken verifyRefreshToken(String token);
     void changePassword(String email, ChangePasswordRequestDTO req);
     void sendVerificationEmail(String email);
     Optional<Member> getMemberById(Long id);
