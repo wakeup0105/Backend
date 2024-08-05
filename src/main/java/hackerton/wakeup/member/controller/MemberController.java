@@ -12,6 +12,7 @@ import hackerton.wakeup.member.entity.dto.response.JwtTokenResponseDTO;
 import hackerton.wakeup.member.entity.dto.response.MyInfoResponseDTO;
 import hackerton.wakeup.member.service.MemberService;
 import hackerton.wakeup.memberInfo.service.MemberInfoService;
+import hackerton.wakeup.refresh.entity.RefreshToken;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +33,8 @@ public class MemberController {
     private String secretKey;
     @Value("${spring.jwt.expirationTime}")
     private String expirationTime;
+    @Value("${spring.jwt.refresh-expirationTime}")
+    private String refreshExpirationTime;
 
     @PostMapping("/signup")
     @ResponseBody
@@ -46,7 +49,8 @@ public class MemberController {
         characterService.initCharacter(memberService.getMemberByEmail(req.getEmail()).get());
         memberInfoService.initMemberInfo(memberService.getMemberByEmail(req.getEmail()).get());
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
-        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
+        RefreshToken refreshToken = memberService.createRefreshToken(req.getEmail());
+        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime, refreshToken.getToken(), refreshExpirationTime));
     }
 
     @PostMapping("/login")
@@ -58,7 +62,8 @@ public class MemberController {
         if (member == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         String token = JwtTokenUtil.createToken(member.getEmail(), secretKey, Long.parseLong(expirationTime));
-        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
+        RefreshToken refreshToken = memberService.createRefreshToken(req.getEmail());
+        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime, refreshToken.getToken(), refreshExpirationTime));
     }
 
     @PostMapping("/find-account")
@@ -71,7 +76,8 @@ public class MemberController {
 //            return new ResponseEntity<>("인증코드가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
 //        }
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
-        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
+        RefreshToken refreshToken = memberService.createRefreshToken(req.getEmail());
+        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime, refreshToken.getToken(), refreshExpirationTime));
     }
 
     @PatchMapping("/change-password")

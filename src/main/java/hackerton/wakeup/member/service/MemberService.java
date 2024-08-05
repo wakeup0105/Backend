@@ -12,7 +12,7 @@ public interface MemberService {
     boolean checkEmailDuplication(String email);
     void joinMember(JoinRequestDTO req);
     Member loginMember(LoginRequestDTO req);
-    RefreshToken createRefreshToken(String email, Long expiresInSeconds);
+    RefreshToken createRefreshToken(String email);
     RefreshToken verifyRefreshToken(String token);
     void changePassword(String email, ChangePasswordRequestDTO req);
     void sendVerificationEmail(String email);

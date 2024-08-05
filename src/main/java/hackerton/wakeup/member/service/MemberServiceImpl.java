@@ -69,12 +69,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public RefreshToken createRefreshToken(String email, Long expiresInSeconds) {
+    public RefreshToken createRefreshToken(String email) {
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
         if (optionalMember.isEmpty()) return null;
         Member member = optionalMember.get();
         Instant instant = Instant.now().plusSeconds(Long.parseLong(refreshExpirationTime));
-        String refreshToken = JwtTokenUtil.createRefreshToken(email, secretKey, expiresInSeconds);
+        String refreshToken = JwtTokenUtil.createRefreshToken(email, secretKey, Long.parseLong(refreshExpirationTime));
         return refreshTokenRepository.save(RefreshTokenConverter.createTokenConverter(refreshToken, member, instant));
     }
 
