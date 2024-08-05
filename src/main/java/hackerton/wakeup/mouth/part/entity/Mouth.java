@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "mouth")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
