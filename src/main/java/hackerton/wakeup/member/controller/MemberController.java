@@ -4,10 +4,7 @@ import hackerton.wakeup.character.service.CharacterService;
 import hackerton.wakeup.common.security.JwtTokenUtil;
 import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
-import hackerton.wakeup.member.entity.dto.request.ChangePasswordRequestDTO;
-import hackerton.wakeup.member.entity.dto.request.FindAccountRequestDTO;
-import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
-import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
+import hackerton.wakeup.member.entity.dto.request.*;
 import hackerton.wakeup.member.entity.dto.response.JwtTokenResponseDTO;
 import hackerton.wakeup.member.entity.dto.response.MyInfoResponseDTO;
 import hackerton.wakeup.member.service.MemberService;
@@ -68,8 +65,8 @@ public class MemberController {
 
     @PostMapping("/refresh")
     @ResponseBody
-    public ResponseEntity<JwtTokenResponseDTO> refreshToken(@RequestBody String refreshToken){
-        RefreshToken verifyRefreshToken = memberService.verifyRefreshToken(refreshToken);
+    public ResponseEntity<JwtTokenResponseDTO> refreshToken(@RequestBody RefreshRequestDTO refreshToken){
+        RefreshToken verifyRefreshToken = memberService.verifyRefreshToken(refreshToken.getRefreshToken());
         if (verifyRefreshToken == null) return ResponseEntity.badRequest().build();
         String email = verifyRefreshToken.getMember().getEmail();
         String newToken = JwtTokenUtil.createToken(email, secretKey, Long.parseLong(expirationTime));
