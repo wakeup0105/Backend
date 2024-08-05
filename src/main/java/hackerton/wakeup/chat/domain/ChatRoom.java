@@ -22,4 +22,18 @@ public class ChatRoom extends BaseEntity {
     @Column
     private Integer memberNum = 1;
 
+    @Builder.Default
+    @Enumerated(EnumType.STRING)
+    @Column
+    private Status status = Status.open;
+
+    @Column
+    private String password;
+
+    @Column
+    private boolean isPublic;
+
+    @ManyToOne
+    @JoinColumn(name = "BACKGROUND_IMAGE")
+    private Background background;
 }
