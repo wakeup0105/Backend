@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.service;
 
+import hackerton.wakeup.common.security.JwtTokenUtil;
 import hackerton.wakeup.email.service.EmailSenderService;
 import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
@@ -8,6 +9,7 @@ import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
 import hackerton.wakeup.refresh.entity.RefreshToken;
+import hackerton.wakeup.refresh.entity.RefreshTokenConverter;
 import hackerton.wakeup.refresh.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Optional;
 
 @Service
@@ -32,6 +35,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Value("${spring.jwt.refresh-expirationTime}")
     private String refreshExpirationTime;
+    @Value("${spring.jwt.secretKey}")
+    private String secretKey;
 
     @Override
     public boolean checkEmailDuplication(String email) {
@@ -65,7 +70,12 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public RefreshToken createRefreshToken(String email, Long expiresInSeconds) {
-        return null;
+        Optional<Member> optionalMember = memberRepository.findByEmail(email);
+        if (optionalMember.isEmpty()) return null;
+        Member member = optionalMember.get();
+        Instant instant = Instant.now().plusSeconds(Long.parseLong(refreshExpirationTime));
+        String refreshToken = JwtTokenUtil.createRefreshToken(email, secretKey, expiresInSeconds);
+        return refreshTokenRepository.save(RefreshTokenConverter.createTokenConverter(refreshToken, member, instant));
     }
 
     @Override
