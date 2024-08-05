@@ -70,7 +70,10 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean logoutMember(String email) {
-        return false;
+        Optional<Member> member = memberRepository.findByEmail(email);
+        if (member.isEmpty()) return false;
+        refreshTokenRepository.deleteByMember(member.get());
+        return true;
     }
 
     @Override
