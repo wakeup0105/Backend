@@ -15,7 +15,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiresInSeconds))
+                .setExpiration(new Date(System.currentTimeMillis() + expiresInSeconds * 1000))
                 .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
     }
@@ -27,7 +27,7 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiresInSeconds))
+                .setExpiration(new Date(System.currentTimeMillis() + expiresInSeconds * 1000))
                 .signWith(SignatureAlgorithm.HS256, key)
                 .compact();
     }
