@@ -23,4 +23,11 @@ public class AchievementController {
     ) {
         return ResponseEntity.ok(achievementService.getAchievement(achievementRequest.getNickname(), achievementRequest.getTag()));
     }
+
+    @PostMapping("/goal")
+    public ResponseEntity<GetGoalResponse> getGoal(
+            @RequestBody AchievementRequest achievementRequest
+    ) {
+        return ResponseEntity.ok(achievementService.getGoal(achievementRequest.getNickname(), achievementRequest.getTag()));
+    }
 }
