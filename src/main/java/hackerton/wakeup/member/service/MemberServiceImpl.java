@@ -7,7 +7,10 @@ import hackerton.wakeup.member.entity.dto.request.ChangePasswordRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
 import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
 import hackerton.wakeup.member.repository.MemberRepository;
+import hackerton.wakeup.refresh.entity.RefreshToken;
+import hackerton.wakeup.refresh.repository.RefreshTokenRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,10 @@ public class MemberServiceImpl implements MemberService {
     private final EmailVerifyService emailVerifyService;
     private final EmailSenderService emailSenderService;
     private final PasswordEncoder passwordEncoder;
+    private final RefreshTokenRepository refreshTokenRepository;
+
+    @Value("${spring.jwt.refresh-expirationTime}")
+    private String refreshExpirationTime;
 
     @Override
     public boolean checkEmailDuplication(String email) {
@@ -54,6 +61,16 @@ public class MemberServiceImpl implements MemberService {
 
 
         return member;
+    }
+
+    @Override
+    public RefreshToken createRefreshToken(String email, Long expiresInSeconds) {
+        return null;
+    }
+
+    @Override
+    public RefreshToken verifyRefreshToken(String email) {
+        return null;
     }
 
     @Override
