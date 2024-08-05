@@ -47,7 +47,8 @@ public class MemberController {
         memberInfoService.initMemberInfo(memberService.getMemberByEmail(req.getEmail()).get());
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
         RefreshToken refreshToken = memberService.createRefreshToken(req.getEmail());
-        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime, refreshToken.getToken(), refreshExpirationTime));
+        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime,
+                refreshToken.getToken(), refreshExpirationTime));
     }
 
     @PostMapping("/login")
@@ -60,7 +61,8 @@ public class MemberController {
 
         String token = JwtTokenUtil.createToken(member.getEmail(), secretKey, Long.parseLong(expirationTime));
         RefreshToken refreshToken = memberService.createRefreshToken(req.getEmail());
-        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime, refreshToken.getToken(), refreshExpirationTime));
+        return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime,
+                refreshToken.getToken(), refreshExpirationTime));
     }
 
     @PostMapping("/refresh")
@@ -70,7 +72,8 @@ public class MemberController {
         if (verifyRefreshToken == null) return ResponseEntity.badRequest().build();
         String email = verifyRefreshToken.getMember().getEmail();
         String newToken = JwtTokenUtil.createToken(email, secretKey, Long.parseLong(expirationTime));
-        return ResponseEntity.ok(new JwtTokenResponseDTO(newToken, expirationTime, refreshToken.getRefreshToken(), refreshExpirationTime));
+        return ResponseEntity.ok(new JwtTokenResponseDTO(newToken, expirationTime,
+                refreshToken.getRefreshToken(), refreshExpirationTime));
     }
 
     @PostMapping("/find-account")
