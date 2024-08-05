@@ -66,6 +66,16 @@ public class MemberController {
         return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime, refreshToken.getToken(), refreshExpirationTime));
     }
 
+    @PostMapping("/refresh")
+    @ResponseBody
+    public ResponseEntity<JwtTokenResponseDTO> refreshToken(@RequestBody String refreshToken){
+        RefreshToken verifyRefreshToken = memberService.verifyRefreshToken(refreshToken);
+        if (verifyRefreshToken == null) return ResponseEntity.badRequest().build();
+        String email = verifyRefreshToken.getMember().getEmail();
+        String newToken = JwtTokenUtil.createToken(email, secretKey, Long.parseLong(expirationTime));
+        return ResponseEntity.ok(new JwtTokenResponseDTO(newToken, expirationTime, email, refreshExpirationTime));
+    }
+
     @PostMapping("/find-account")
     @ResponseBody
     public ResponseEntity<JwtTokenResponseDTO> findAccount(@Valid @RequestBody FindAccountRequestDTO req){
