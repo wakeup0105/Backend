@@ -70,7 +70,7 @@ public class MemberController {
         if (verifyRefreshToken == null) return ResponseEntity.badRequest().build();
         String email = verifyRefreshToken.getMember().getEmail();
         String newToken = JwtTokenUtil.createToken(email, secretKey, Long.parseLong(expirationTime));
-        return ResponseEntity.ok(new JwtTokenResponseDTO(newToken, expirationTime, email, refreshExpirationTime));
+        return ResponseEntity.ok(new JwtTokenResponseDTO(newToken, expirationTime, refreshToken.getRefreshToken(), refreshExpirationTime));
     }
 
     @PostMapping("/find-account")
