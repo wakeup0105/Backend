@@ -8,7 +8,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "OwnHeadAvatar")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

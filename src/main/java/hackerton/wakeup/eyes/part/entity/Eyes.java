@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Eyes")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

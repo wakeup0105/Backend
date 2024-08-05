@@ -1,5 +1,6 @@
 package hackerton.wakeup.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import hackerton.wakeup.character.entity.Character;
 import hackerton.wakeup.memberInfo.entity.MemberInfo;
@@ -9,10 +10,11 @@ import lombok.*;
 
 @Entity
 @Table(name = "Member")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
