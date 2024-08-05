@@ -71,5 +71,22 @@ public class AchievementService {
             dateMap.put(formatted, Map.of(dayOfWeek.toString(), getAchievementResponse));
         }
     }
+    public GetGoalResponse getGoal(String nickname, String tag) {
+        MemberInfo memberInfo = memberInfoRepository.findByNicknameAndTag(nickname, tag).get();
+        Member member = memberInfo.getMember();
+        Character character = characterRepository.findByIdMember(member.getId()).get();
+
+        Long requiredExp = character.getLevel() * 5L;
+        Long currentExp = character.getExp();
+
+        // 비율 계산 및 백분율 계산
+        float ratio = (float) currentExp / (float) requiredExp * 100;
+
+        // 소수점 둘째 자리까지 반올림
+        float percentage = Math.round(ratio * 100) / 100.0f;
+
+        // Dto 생성 및 반환
+        return new GetGoalResponse(member.getId(), requiredExp, currentExp, percentage);
+    }
 
 }
