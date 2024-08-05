@@ -69,6 +69,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public boolean logoutMember(String email) {
+        return false;
+    }
+
+    @Override
     public RefreshToken createRefreshToken(String email) {
         Optional<Member> optionalMember = memberRepository.findByEmail(email);
         if (optionalMember.isEmpty()) return null;
