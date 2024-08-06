@@ -37,6 +37,8 @@ public class SecurityConfig {
                                 "/api/member/login",
                                 "/api/member/signup",
                                 "/api/member/find-account",
+                                "/api/member/send-verification",
+                                "/api/member/logout",
                                 "/h2-console"
                         ).permitAll()
 
