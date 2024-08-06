@@ -4,10 +4,7 @@ import hackerton.wakeup.character.service.CharacterService;
 import hackerton.wakeup.common.security.JwtTokenUtil;
 import hackerton.wakeup.email.service.EmailVerifyService;
 import hackerton.wakeup.member.entity.Member;
-import hackerton.wakeup.member.entity.dto.request.ChangePasswordRequestDTO;
-import hackerton.wakeup.member.entity.dto.request.FindAccountRequestDTO;
-import hackerton.wakeup.member.entity.dto.request.JoinRequestDTO;
-import hackerton.wakeup.member.entity.dto.request.LoginRequestDTO;
+import hackerton.wakeup.member.entity.dto.request.*;
 import hackerton.wakeup.member.entity.dto.response.JwtTokenResponseDTO;
 import hackerton.wakeup.member.entity.dto.response.MyInfoResponseDTO;
 import hackerton.wakeup.member.service.MemberService;
@@ -67,9 +64,9 @@ public class MemberController {
         if (!memberService.checkEmailDuplication(req.getEmail())){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-//        if(!emailVerifyService.verifyCode(req.getEmail(), req.getVerificationCode())){
-//            return new ResponseEntity<>("인증코드가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
-//        }
+        if(!emailVerifyService.verifyCode(req.getEmail(), req.getVerificationCode())){
+            return ResponseEntity.badRequest().build();
+        }
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
         return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
     }
@@ -88,8 +85,8 @@ public class MemberController {
     }
 
     @PostMapping("/send-verification")
-    public ResponseEntity<String> sendVerification(@RequestParam("email") String email){
-        memberService.sendVerificationEmail(email);
+    public ResponseEntity<String> sendVerification(@Valid @RequestBody SendEmailRequestDTO req){
+        memberService.sendVerificationEmail(req.getEmail());
         return ResponseEntity.ok("인증코드가 이메일로 전송 되었습니다.");
     }
 
