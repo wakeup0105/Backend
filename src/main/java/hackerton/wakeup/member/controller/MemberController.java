@@ -64,9 +64,9 @@ public class MemberController {
         if (!memberService.checkEmailDuplication(req.getEmail())){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-//        if(!emailVerifyService.verifyCode(req.getEmail(), req.getVerificationCode())){
-//            return new ResponseEntity<>("인증코드가 일치하지 않습니다.", HttpStatus.BAD_REQUEST);
-//        }
+        if(!emailVerifyService.verifyCode(req.getEmail(), req.getVerificationCode())){
+            return ResponseEntity.badRequest().build();
+        }
         String token = JwtTokenUtil.createToken(req.getEmail(), secretKey, Long.parseLong(expirationTime));
         return ResponseEntity.ok(new JwtTokenResponseDTO(token, expirationTime));
     }
