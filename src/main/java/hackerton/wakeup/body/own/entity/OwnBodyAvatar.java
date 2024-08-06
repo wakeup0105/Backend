@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "OwnBodyAvatar")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Body")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor

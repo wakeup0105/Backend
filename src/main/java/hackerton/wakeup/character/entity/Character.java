@@ -1,6 +1,7 @@
 package hackerton.wakeup.character.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import hackerton.wakeup.body.own.entity.OwnBodyAvatar;
 import hackerton.wakeup.eyes.own.entity.OwnEyesAvatar;
@@ -15,10 +16,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "Character")
-@Builder
+@Builder(toBuilder = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Character {
 
     @EmbeddedId
