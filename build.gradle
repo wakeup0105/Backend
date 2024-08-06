@@ -37,7 +37,7 @@ dependencies {
     runtimeOnly 'com.h2database:h2'
 
     // postgresql
-//    implementation 'org.postgresql:postgresql'
+    implementation 'org.postgresql:postgresql'
 
     // lombok
     compileOnly 'org.projectlombok:lombok'
